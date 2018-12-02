@@ -67,15 +67,12 @@ if (!empty($_SESSION['alert'])) {
         <!-- /.col -->
       </div>
     </form>
-
-    
     <!-- /.social-auth-links -->
-
 <!--    <a href="#">I forgot my password</a><br>-->
-   
   </div>
   <!-- /.login-box-body -->
 </div>
+
 <!-- /.login-box -->
 <!-- jQuery 2.2.0 -->
 <script src="assets/plugins/jQuery/jQuery-2.2.0.min.js"></script>
@@ -91,12 +88,12 @@ if (!empty($_SESSION['alert'])) {
       increaseArea: '20%' // optional
     });
   });
+
   function setMess(){
      document.getElementById('message').innerHTML="Sign in to continue";
   }
-//$(document).ready(function(){   
 
-
+//$(document).ready(function(){
  //    $("#signin").click(function()
  //    {  
  //    var username = document.getElementById()     

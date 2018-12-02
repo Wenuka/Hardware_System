@@ -75,7 +75,7 @@
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header" style="text-align: center;background-color: #222d32;">
-                        <img src="<?php echo (isset($admindata))?'../../'.$admindata->image_path:'../../assets/images/admin/avatar.png';?>"  style='border-radius: 40%;' class="img-circle" alt="User Image">
+                        <img src='../../assets/images/admin/avatar.png'  style='border-radius: 40%;' class="img-circle" alt="User Image">
 
                         <p>
                             <?php echo (isset($admindata))?$admindata->name:'';?>

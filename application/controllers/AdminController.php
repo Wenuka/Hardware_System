@@ -4,158 +4,94 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AdminController extends CI_Controller
 {
 
-    public function viewFilter()
+    public function getSessionAdminID()
     {
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $this->load->model('LoginModel');
-                $filterdata = $this->AdminModel->FilterData();
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                if (sizeof($filterdata)>0) {
-                    foreach ($filterdata as $key => $value) {
-                        $logindata = $this->LoginModel->filterLoginData($value->filter_id)[0];
-                        if ($logindata != null) {
-                            $filterdata[$key]->unm = $logindata->username;
-                            $filterdata[$key]->pwd = $logindata->password;
-                        } else {
-                            $filterdata[$key]->unm = "error";
-                            $filterdata[$key]->pwd = "error";
-                        }
-                    }
-                }
-                $data = array('filterdata' => $filterdata, 'admindata' => $admindata);
-                $this->load->view('admin/filterDetails', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C001.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
+        $this->load->model('SessionModel');
+        $adminID = $this->SessionModel->checkSessionAdmin();
+        return $adminID;
     }
-    public function allpartscodes()
-    {
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $this->load->model('AgentModel');
-                $partdata = $this->AgentModel->partData();
-                $codedata = $this->AgentModel->codeData();
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $data = array('partdata' => $partdata,'codedata' => $codedata, 'admindata' => $admindata);
-                $this->load->view('admin/partsCodes', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C001.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
-    }
-    public function viewCustomer()
-    {
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $customerdata = $this->AdminModel->customerData();
-                $data = array('customerdata' => $customerdata, 'admindata' => $admindata);
-                $this->load->view('admin/customerDetails', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
-    }
-    public function deleteEntries()
-    {
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "admin" && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $agentdata = $this->AdminModel->agentData();
-                $customerdata = $this->AdminModel->customerData();
-                $data = array('customerdata' => $customerdata, 'admindata' => $admindata,'agentdata'=>$agentdata);
-                $this->load->view('admin/addEntries', $data);
-            }
-            elseif ($_SESSION['usertype'] == "superadmin" && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $agentdata = $this->AdminModel->agentData();
-                $customerdata = $this->AdminModel->customerData();
-                $data = array('customerdata' => $customerdata, 'admindata' => $admindata,'agentdata'=>$agentdata);
-                $this->load->view('admin/deleteEntries', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
-    }
-    public function viewAgents()
-    {
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $agentdata = $this->AdminModel->agentData();
-                if (sizeof($agentdata)>0) {
-                    foreach ($agentdata as $key => $value) {
-                        $logindata = $this->AdminModel->agentLoginData($value->agent_id)[0];
-                        if ($logindata != null) {
-                            $agentdata[$key]->unm = $logindata->username;
-                            $agentdata[$key]->pwd = $logindata->password;
-                        } else {
-                            $agentdata[$key]->unm = "error";
-                            $agentdata[$key]->pwd = "error";
-                        }
-                    }
-                }
-                $data = array('agentdata' => $agentdata, 'admindata' => $admindata);
-                $this->load->view('admin/agentDetails', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
-    }
+
     public function viewAdmin()
     {
+        $this->load->model('AdminModel');
         $this->load->library('session');
+        $admin_id = $_SESSION['admin_no'];
+        // Get admin data
+        $admindata = $this->AdminModel->adminData($admin_id)[0];
+        $logindata = $this->AdminModel->adminLoginData($admin_id)[0];
+        
+        if(!$admindata->active)
+        {
+            $_SESSION['error'] = "Sorry, This admin is currently inactive";
+            //redirect();
+        }
+        $_SESSION['login_id'] = $logindata->userID;
+        $data = array('admindata' => $admindata, 'logindata' => $logindata);
+
+        $this->load->view('admin/adminDetails', $data);
+    }
+
+
+
+    public function viewAgents()
+    {
+        $this->load->model('AdminModel');
+        $this->load->library('session');
+        $this->load->library('Constants');
         if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
+            if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no'])) {
                 $admin_id = $_SESSION['admin_no'];
-                $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $logindata = $this->AdminModel->adminLoginData($admin_id)[0];
-                if ($_SESSION['usertype'] == "superadmin") {
-                    $logindata = $this->AdminModel->superadminLoginData($admin_id)[0];
-                }
-                $_SESSION['login_id'] = $logindata->login_id;
-                $data = array('admindata' => $admindata, 'logindata' => $logindata);
-                $this->load->view('admin/adminDetails', $data);
+                //Get agent data
+                $agentdata = $this->AdminModel->getAgentData($admin_id);
+
+                $data = array('agentdata' => $agentdata );
+                $this->load->view('admin/adminAgentView', $data);
+            } else {
+                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
+                redirect();
+            }
+        } else {
+            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
+            redirect();
+        }
+    }
+
+    public function viewReps()
+    {
+        $this->load->model('AdminModel');
+        $this->load->library('session');
+        $this->load->library('Constants');
+        if (isset($_SESSION['usertype'])) {
+            if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no'])) {
+                $admin_id = $_SESSION['admin_no'];
+                //Get agent data
+                $repdata = $this->AdminModel->getRepData($admin_id);
+
+                $data = array('repdata' => $repdata );
+                $this->load->view('admin/adminRepView', $data);
+            } else {
+                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
+                redirect();
+            }
+        } else {
+            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
+            redirect();
+        }
+    }
+
+    public function viewShops()
+    {
+        $this->load->model('AdminModel');
+        $this->load->library('session');
+        $this->load->library('Constants');
+        if (isset($_SESSION['usertype'])) {
+            if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no'])) {
+                $admin_id = $_SESSION['admin_no'];
+                //Get agent data
+                $shopdata = $this->AdminModel->getShopData($admin_id);
+
+                $data = array('shopdata' => $shopdata );
+                $this->load->view('admin/adminShopView', $data);
             } else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
                 redirect();
@@ -189,8 +125,9 @@ class AdminController extends CI_Controller
     public function viewInquiries()
     {
         $this->load->library('session');
+        $this->load->library('Constants');
         if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
+            if (($_SESSION['usertype'] == Constants::$admin) && isset($_SESSION['admin_no'])) {
                 $admin_id = $_SESSION['admin_no'];
                 // $this->load->model('LoginModel');
                 $this->load->model('AdminModel');
@@ -207,32 +144,12 @@ class AdminController extends CI_Controller
             redirect();
         }
     }
-    public function viewWork()
-    {
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                // $this->load->model('LoginModel');
-                $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $workdata = $this->AdminModel->workData();
-                $data = array('admindata' => $admindata, 'workdata' => $workdata);
-                $this->load->view('admin/works', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
-    }
+
     public function editMyAccount()
     {
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['login_id']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == "admin") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $data1 = array();
@@ -269,25 +186,29 @@ class AdminController extends CI_Controller
         }
 
     }
+
     public function addInquiry()
     {
         $this->load->library('session');
+        $this->load->library('Constants');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == Constants::$admin) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
                 $this->load->model('LoginModel');
                 if (isset($_POST['agent_id']) && isset($_POST['description'])) {
                     $data1 = array(
-                        'agent_id' => $_POST['agent_id'],
-                        'filter_id' => 0,
+                        'inquiryType'=>'AdAg',
+                        'senderID' => $admin_id,
+                        'receiverID' => $_POST['agent_id'],
                         'message' => $_POST['description']
                     );
                     $this->LoginModel->addInquiry($data1);
+                    redirect($_SERVER['HTTP_REFERER']);
                     $_SESSION['alert'] = 'You have succesfully added Inquiry to Agent ID ' . $_POST['agent_id'] . ' with description "' . $_POST['description'] . '".';
+
                 }
-                $this->deleteEntries();
             } else {
                 $_SESSION['error'] = 'Something is wrong. Please contact the system administrator. Error code C005.';
                 redirect();
@@ -354,11 +275,12 @@ class AdminController extends CI_Controller
         }
 
     }
+
     public function addNewAgent()
     {
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == "Ad") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -366,15 +288,14 @@ class AdminController extends CI_Controller
                 $this->load->model('LoginModel');
                 if (isset($_POST['fullname'])) {
                     $data1 = array(
-                        'name' => $_POST['fullname'],
+                        'agentName' => $_POST['fullname'],
                         'email' => $_POST['email'],
                         'address' => $_POST['address'],
                         'province' => $_POST['province'],
                         'town' => $_POST['town'],
-                        'date_of_birth' => $_POST['bday'],
-                        'nic' => $_POST['nic'],
-                        'mobile' => $_POST['mobile'],
-                        'admin_id' => $admin_id
+                        'agentCode' => $_POST['agentCode'],
+                        'contact' => $_POST['mobile'],
+                        'adminID' => $admin_id
                     );
                     $agent_id = $this->AdminModel->addAgent($data1);
                     $username = $this->testUsername($_POST['fullname']);
@@ -382,9 +303,8 @@ class AdminController extends CI_Controller
                     $data3 = array(
                         'username' => $username,
                         'password' => $password,
-                        'initial_password' => $password,
-                        'usertype' => 'agent',
-                        'id' => $agent_id
+                        'usertype' => 'Ag',
+                        'foreignid' => $agent_id
                     );
                     $this->LoginModel->addLogin($data3);
                     $_SESSION['alert'] = 'You have succesfully added ' . $_POST['fullname'] . ' to agent id #' . $agent_id . '.<br>Initial username is ' . $username . ' and password is ' . $password . '. <br>Please see agent details for more info.';
@@ -400,6 +320,7 @@ class AdminController extends CI_Controller
         }
 
     }
+
     public function deleteWork()
     {
         $this->load->library('session');
@@ -486,7 +407,7 @@ class AdminController extends CI_Controller
                     $this->AdminModel->removeAgentInquiry($data2, $_POST['agent_id']);
                     $this->AdminModel->removeAgentLogin($_POST['agent_id']);
                     $filterdata = $this->LoginModel->agentFilterData($_POST['agent_id']);
-                    for ($i=0; $i < sizeof($filterdata); $i++) { 
+                    for ($i=0; $i < sizeof($filterdata); $i++) {
                         $this->deleteFilterDetails($filterdata[$i]->filter_id);
                     }
                     $_SESSION['alert'] = 'You have succesfully deleted agent with Agent ID #' . $_POST['agent_id'] . '.';
@@ -571,7 +492,7 @@ class AdminController extends CI_Controller
                     $_SESSION['alert'] = "Something went wrong. Please try again.";
                     $this->viewInquiries();
                 }
-            } 
+            }
             else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";
                 redirect();
@@ -618,7 +539,7 @@ class AdminController extends CI_Controller
                     $_SESSION['alert'] = "Something went wrong. Please try again.";
                     $this->viewInquiries();
                 }
-            } 
+            }
             else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";
                 redirect();

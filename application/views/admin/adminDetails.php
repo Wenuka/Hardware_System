@@ -120,8 +120,8 @@
 
                                   <div class="text-center">
                                     <?php 
-                                    if ($admindata->image_path != null){
-                                      echo '<img src="../../'.$admindata->image_path.'" width=200 height=200 class="avatar img-circle" alt="avatar">';
+                                    if ($admindata->imagePath != null){
+                                      echo '<img src="../../'.$admindata->imagePath.'" width=200 height=200 class="avatar img-circle" alt="avatar">';
                                     }
                                     else {echo '<img src="../../assets/images/admin/avatar.png" width=200 height=200 class="avatar img-circle" alt="avatar">';}  ?>
 
@@ -200,7 +200,7 @@
 
                                     <div class="form-group">
                                       <label for="fullname">Full Name</label>
-                                      <input type="text" class="form-control is-disabled" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo $admindata->name; ?>" disabled required>
+                                      <input type="text" class="form-control is-disabled" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo $admindata->adminName; ?>" disabled required>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Email address</label>
@@ -209,7 +209,7 @@
                                     </div>
                                     <div class="form-group">
                                       <label for="tel">Mobile</label>
-                                      <input type="tel" class="form-control is-disabled" id="tele" name="tele" value="<?php echo $admindata->mobile; ?>" data-maxlength="10" data-minlength="9" pattern="[0-9]{10}" disabled required>
+                                      <input type="tel" class="form-control is-disabled" id="tele" name="tele" value="<?php echo $admindata->contact; ?>" data-maxlength="10" data-minlength="9" pattern="[0-9]{10}" disabled required>
                                       <div class="help">Format of the telephone number should be [0711234567] (length - 10 numbers.)</div>
                                     </div>
                                     <h4 style="text-align:left;color:dimgrey;padding-bottom:6px;border-bottom:1px solid #f4f4f4;">Accounts Info</h4>

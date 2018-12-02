@@ -156,7 +156,7 @@ class LoginModel extends CI_Model
 		$this->db->insert('login', $results);  
 	}
 	function addInquiry($results){
-		$this->db->insert('inquiries', $results);  
+		$this->db->insert('inquiry', $results);
 	}
 	function addUserPhoto($path, $id , $type){
 		$this->db->where($type.'_id', $id);  
