@@ -46,12 +46,13 @@ class OrderModel extends CI_Model
     }
 
 
-    function retreiveOrderDetails($adminID,$agentID,$equipID)
+    function retreiveOrderDetails($adminID,$agentID,$equipID,$status)
     {
         $this->db->select('e.*,a.*,d.*');
         $this->db->where('a.adminID', $adminID);
         $this->db->where('a.agentID', $agentID);
         $this->db->where('e.equipID', $equipID);
+        $this->db->where('d.status', $status);
         $this->db->from('agent a');
         $this->db->join('rep r', 'a.agentID = r.agentID');
         $this->db->join('orders t', 't.repID = r.repID');
@@ -65,14 +66,24 @@ class OrderModel extends CI_Model
         }
     }
 
+    function changeStatus($orderDetailID)
+    {
+
+        $this->db->set('status','Deliver-Ad');
+        $this->db->where('orderDetailID', $orderDetailID);
+        $this->db->update('order_details');
+        return;
+    }
+
     function getConfirmedOrderCount($adminID)
     {
         $this->db->select('distinct COUNT(*) as c');
         $this->db->where('agent.adminID', $adminID);
-        $this->db->where('orders.orderStatus', 'confirm');
+        $this->db->where('order_details.status', 'Deliver-Ad');
         $this->db->from('agent');
         $this->db->join('rep', 'agent.agentID = rep.agentID');
         $this->db->join('orders', 'orders.repID = rep.repID');
+        $this->db->join('order_details', 'orders.orderID = order_details.orderID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
             return $query1->result();    // return a array of object
@@ -83,12 +94,13 @@ class OrderModel extends CI_Model
 
     function getPendingOrderCount($adminID)
     {
-        $this->db->select('COUNT(*) as c');
+        $this->db->select('distinct COUNT(*) as c');
         $this->db->where('agent.adminID', $adminID);
-        $this->db->where('orders.orderStatus', 'in_progress');
+        $this->db->where('order_details.status', 'Order_Placed');
         $this->db->from('agent');
         $this->db->join('rep', 'agent.agentID = rep.agentID');
         $this->db->join('orders', 'orders.repID = rep.repID');
+        $this->db->join('order_details', 'orders.orderID = order_details.orderID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
             return $query1->result();    // return a array of object

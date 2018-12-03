@@ -58,12 +58,15 @@ class AdminController extends CI_Controller
 
     public function viewOrderDetail(){
         $this->load->model('OrderModel');
+        $this->load->library('session');
+        $this->load->library('Constants');
         $agentID = $_POST['agentID']; //merchant code
-        $equipid = $_POST['transactionId'];
+        $equipid = $_POST['equipID'];
+        $status = $_POST['status'];
         if (isset($_SESSION['usertype'])) {
             if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no'])) {
                 $admin_id = $_SESSION['admin_no'];
-                $grouporderdata = $this->OrderModel->retreiveOrderDetails($admin_id,$agentID,$equipid);
+                $grouporderdata = $this->OrderModel->retreiveOrderDetails($admin_id,$agentID,$equipid,$status);
                 echo json_encode($grouporderdata);
             }else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
@@ -74,8 +77,27 @@ class AdminController extends CI_Controller
             redirect();
         }
         //get Order data group by agent
+    }
 
-
+    public function changeStatus()
+    {
+        $this->load->model('OrderModel');
+        $this->load->library('session');
+        $this->load->library('Constants');
+        $orderDetailID = $_POST['orderDetailID']; //merchant code
+        if (isset($_SESSION['usertype'])) {
+            if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no'])) {
+                $this->OrderModel->changeStatus($orderDetailID);
+                redirect($_SERVER['HTTP_REFERER']);
+            }else {
+                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
+                redirect();
+            }
+        } else {
+            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
+            redirect();
+        }
+        //get Order data group by agent
     }
 
     public function viewReps()

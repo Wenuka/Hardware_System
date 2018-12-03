@@ -360,6 +360,73 @@
                                 <div class="box-header with-border" style="text-align: center;">
                                     <h3 class="box-title"
                                         style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">
+                                        Recent Orders Group by Agent and Equipment </h3>
+                                </div>
+                                <div class="box-body" style="padding:0 4%;">
+                                    <br>
+                                    <table id="ordertable" class="table table-striped nowrap table-responsive"
+                                           cellspacing="0" width="100%">
+                                        <thead class="no-border">
+                                        <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
+                                            <th data-priority="2">Agent ID</th>
+                                            <th data-priority="2">Equipment ID</th>
+                                            <th data-priority="2">Equipment Name</th>
+                                            <th data-priority="2">Order Count</th>
+                                            <th data-priority="1">Status</th>
+                                            <th data-priority="1" style="max-width:90px;">More Details</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="workorderTable" style="text-align: center;font-size:13px;">
+                                        <?php
+                                        if (sizeof($grouporderdata) > 0) {
+                                            for ($i = 0; $i < sizeof($grouporderdata); $i++) {
+
+//	                                                    ?>
+                                                <tr style="text-align:left;">
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->agentID; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipID . "  -  " . $grouporderdata[$i]->equipCode; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipName; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->orderCount; ?></td>
+                                                    <?php if($grouporderdata[$i]->status == "Order_Placed"){?>
+                                                    <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: cornflowerblue;width:20px;">IN_PROGRESS-AD</td>
+                                                    <?php }else if($grouporderdata[$i]->status == "Deliver-Ad"){ ?>
+                                                    <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: yellowgreen;width:20px;">DELIVERED-AD</td>
+                                                <?php }else if($grouporderdata[$i]->status == "Deliver-Ag"){ ?>
+                                                    <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: darkgreen;width:20px;">DELIVERED-AG</td>
+                                                <?php }else if($grouporderdata[$i]->status == "Rejected-Ad"){ ?>
+                                                    <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: orangered;width:20px;">REJECTED-AD</td>
+                                                <?php }else if($grouporderdata[$i]->status == "Rejected-Ag"){ ?>
+                                                    <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: darkred;width:20px;">REJECTED-AG</td>
+                                                    <?php } ?>
+                                                    <td style="border-right:1px solid #f4f4f4;">
+                                                        <a href="#exampleModalGroupData" data-toggle="modal" data-status="<?php echo $grouporderdata[$i]->status; ?>" data-todo="<?php echo $grouporderdata[$i]->equipID; ?>" data-id='<?php echo $grouporderdata[$i]->agentID; ?>'>More
+                                                            Details</a>
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        } ?>
+                                        </tbody>
+                                    </table>
+                                    <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </section>
+        <section class="content" id="content" style="padding-right:2%;padding-left:2%;">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="content_lg" style="padding: 0;">
+                <div class="col-lg-12 col-md-12 col-sm-12" id="content_10">
+                    <?php //include 'adminTop.php'; ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="about_web" class="box box-solid"
+                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
+                                <div class="box-header with-border" style="text-align: center;">
+                                    <h3 class="box-title"
+                                        style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">
                                         Recent Orders</h3>
                                 </div>
                                 <div class="box-body" style="padding:0 4%;">
@@ -392,21 +459,21 @@
                                                     <td style="border-right:1px solid #f4f4f4;width: 4px"><?php echo $orderdata[$i]->orderCount; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->orderTimestamp; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->deliverTimestamp; ?></td>
-                                                    <?php if ($orderdata[$i]->orderStatus == "in_progress") { ?>
+                                                    <?php if ($orderdata[$i]->status == "Order_Placed") { ?>
                                                         <td>
                                                             <button type="button"
                                                                     onclick="changeStatus('<?php echo $orderdata[$i]->orderID; ?>')"
                                                                     style="background-color: green;color: black;font-weight: bolder;"
-                                                                    class="btn btn-default">PROGRESS
+                                                                    class="btn btn-default">PROGRESS-AD
                                                             </button>
                                                         </td>
                                                     <?php } else { ?>
-                                                    <td>
-                                                        <button type="button"
-                                                                style="background-color: red;color: black;font-weight: bolder;"
-                                                                disabled="true" class="btn btn-default">CONFIRMED
-                                                        </button>
-                                                    </td>
+                                                        <td>
+                                                            <button type="button"
+                                                                    style="background-color: red;color: black;font-weight: bolder;"
+                                                                    disabled="true" class="btn btn-default">DELIVERED-AD
+                                                            </button>
+                                                        </td>
                                                     <?php }
                                                     ?>
                                                     <td style="border-right:1px solid #f4f4f4;width: 10px">
@@ -431,69 +498,13 @@
             </div>
             <br>
         </section>
-        <section class="content" id="content" style="padding-right:2%;padding-left:2%;">
-            <div class="col-lg-12 col-md-12 col-sm-12" id="content_lg" style="padding: 0;">
-                <div class="col-lg-12 col-md-12 col-sm-12" id="content_10">
-                    <?php //include 'adminTop.php'; ?>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div id="about_web" class="box box-solid"
-                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
-                                <div class="box-header with-border" style="text-align: center;">
-                                    <h3 class="box-title"
-                                        style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">
-                                        Recent Orders Group by Agent and Equipment </h3>
-                                </div>
-                                <div class="box-body" style="padding:0 4%;">
-                                    <br>
-                                    <table id="ordertable" class="table table-striped nowrap table-responsive"
-                                           cellspacing="0" width="100%">
-                                        <thead class="no-border">
-                                        <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                                            <th data-priority="2">Agent ID</th>
-                                            <th data-priority="2">Equipment ID</th>
-                                            <th data-priority="2">Order Count</th>
-                                            <th data-priority="1">Status</th>
-                                            <th data-priority="1" style="max-width:90px;">More Details</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody id="workorderTable" style="text-align: center;font-size:13px;">
-                                        <?php
-                                        if (sizeof($grouporderdata) > 0) {
-                                            for ($i = 0; $i < sizeof($grouporderdata); $i++) {
-
-//	                                                    ?>
-                                                <tr style="text-align:left;"
-                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->agentID; ?></td>
-                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipID . "  -  " . $grouporderdata[$i]->equipCode; ?></td>
-                                                    <td style="border-right:1px solid #f4f4f4;width: 4px"><?php echo $grouporderdata[$i]->orderCount; ?></td>
-                                                    <td style="border-right:1px solid #f4f4f4;width: 10px">
-                                                        <p id="agentIDGroup" style="display: none;"><?php echo $grouporderdata[$i]->agentID; ?></p>
-                                                        <p id="equipIDGroup" style="display: none;"><?php echo $grouporderdata[$i]->equipID; ?></p>
-                                                        <a href="#exampleModalGroupData">More
-                                                            Details</a>
-                                                    </td>
-                                                </tr>
-                                            <?php }
-                                        } ?>
-                                        </tbody>
-                                    </table>
-                                    <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-        </section>
     </div>
     <?php
     include 'footer.html';
     ?>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="exampleModalGroupData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -504,176 +515,25 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="row" style="font-size: 15px;">
-                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
-                        Order Details
-                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <img src="../../assets/images/admin/avatar.png" id="equipImage"
-                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
-                             alt="Equipment Image">
-                    </div>
+                <div class="box-body" style="padding:0 4%;">
                     <br>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Equip Code
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="equipCode">
+                    <table id="ordertable" class="table table-striped nowrap table-responsive"
+                           cellspacing="0" width="100%">
+                        <thead class="no-border">
+                        <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
+                            <th data-priority="2">Agent ID</th>
+                            <th data-priority="2">Equipment ID</th>
+                            <th data-priority="2">Equipment Name</th>
+                            <th data-priority="2">Order Detail ID</th>
+                            <th data-priority="1" >Order Count</th>
+                            <th data-priority="1">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody id="modalTableBody" style="text-align: center;font-size:13px;">
 
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Equip Name
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="equipName">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Unit Price
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="unitPrice">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Order Count
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="orderCount">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Deliver Date
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="deliverTimestamp">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Description
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="description">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Order ID
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="orderID">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Bill Value(LKR)
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="billValue">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Ordered Date
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="orderTimestamp">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Order Status
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="orderStatus">
-
-                    </div>
-                </div>
-                <br>
-                <div class="row" style="font-size: 15px;">
-                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
-                        Agent Details
-                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <img src="../../assets/images/admin/avatar.png" id="agentImage"
-                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
-                             alt="Agent Image">
-                    </div>
-                    <br>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Code
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentCode">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Name
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentName">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Address
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentAddress">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Contact
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentContact">
-
-                    </div>
-                </div>
-                <br>
-                <div class="row" style="font-size: 15px;">
-                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
-                        Rep Details
-                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <img src="../../assets/images/admin/avatar.png" id="repImage"
-                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
-                             alt="Rep Image">
-                    </div>
-                    <br>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Rep Name
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="repName">
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Nic Number
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="nic">
-
-                    </div>
-                </div>
-                <br>
-                <div class="row" style="font-size: 15px;">
-                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
-                        Shop Details
-                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Shop Code
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="shopCode">
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Shop Name
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="shopName">
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Shop Contact
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="tele">
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Risk Score
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="riskScore">
-                    </div>
-                    <div class="col-lg-12 col-md-12 modalLbl">
-                        Shop Address
-                    </div>
-                    <div class="col-lg-12 col-md-12" id="shopAddress">
-                        <p id="longitude" style="display: none;"></p>
-                        <p id="latitude" style="display: none;"></p>
-                        <button id="mapBtn" style="margin: 10px 0;">Load Map</button>
-                        <br>
-                        <!-- <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7922.625388456117!2d79.908538633914!3d6.8530716618097545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTEnMTEuMSJOIDc5wrA1NCc0Ni41IkU!5e0!3m2!1sen!2slk!4v1463212794605"></iframe><br><small><a href="https://www.google.lk/maps/place/6%C2%B051'11.1%22N+79%C2%B054'46.5%22E/@<?php //echo $commondetails->longitude; ?>,<?php //echo $commondetails->latitude; ?>,16z/data=!4m5!3m4!1s0x0:0x0!8m2!3d6.853069!4d79.912916" ><b></b></a></small> -->
-                        <div id="MapDiv"></div>
-                    </div>
+                        </tbody>
+                    </table>
+                    <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
                 </div>
             </div>
         </div>
@@ -1005,185 +865,260 @@
         </div>
     </div>
 </div>
-
+<div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to change the status PROGRESS to DELEIVERED-AD for the clicked order record?
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="changeStatus(this)" id="save" class="btn btn-secondary" data-dismiss="modal">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    </div>
+</div>
 <script>
-    $.ajax({
-        type: "POST",
-        url: "<?php echo site_url(); ?>/AdminController/addNewAgent",
-        data: {
-            'agentID': $('#agentIDGroup').val,
-            'equipID':$('#equipIDGroup').valexampleModalGroupData
-        },
-        success: function(msg)
-        {
-            $("#exampleModalGroupData").modal("toggle");
-            console.log(msg);
-        }
-    });
     $(document).ready(function () {
-        // $('[data-toggle="modal"]').on('click', function (e) {
-        $('#exampleModal').on('show.bs.modal', function (event) {
-            var bookId = $(event.relatedTarget).data('id');
-            var variable = "#modal" + bookId;
-            var agentCode = $(variable).data('todo').agentCode;
-            $('#agentCode').empty();
-            $('#agentCode').append('<p>' + agentCode + '</p>');
-
-            var agentImage = $(variable).data('todo').imagePath;
-            if (agentImage != "") {
-                $('#agentImage').attr("src", agentImage);
-            }
-
-            var equipImage = $(variable).data('todo').photo;
-            if (equipImage != "") {
-                $('#equipImage').attr("src", equipImage);
-            }
-
-            var repImage = $(variable).data('todo').repImagePath;
-            if (repImage != "") {
-                $('#repImage').attr("src", repImage);
-            }
-
-            var agentName = $(variable).data('todo').agentName;
-            $('#agentName').empty();
-            $('#agentName').append('<p>' + agentName + '</p>');
-
-            var address = $(variable).data('todo').address;
-            $('#agentAddress').empty();
-            $('#agentAddress').append('<p>' + address + '</p>');
-
-            var agentContact = $(variable).data('todo').contact;
-            $('#agentContact').empty();
-            $('#agentContact').append('<p>' + agentContact + '</p>');
-
-            var repName = $(variable).data('todo').repName;
-            $('#repName').empty();
-            $('#repName').append('<p>' + repName + '</p>');
-
-            var nic = $(variable).data('todo').nic;
-            $('#nic').empty();
-            $('#nic').append('<p>' + nic + '</p>');
-
-            var shopCode = $(variable).data('todo').shopCode;
-            $('#shopCode').empty();
-            $('#shopCode').append('<p>' + shopCode + '</p>');
-
-            var shopCode = $(variable).data('todo').shopCode;
-            $('#shopCode').empty();
-            $('#shopCode').append('<p>' + shopCode + '</p>');
-
-            var shopName = $(variable).data('todo').shopName;
-            $('#shopName').empty();
-            $('#shopName').append('<p>' + shopName + '</p>');
-
-            var tele = $(variable).data('todo').tele;
-            $('#tele').empty();
-            $('#tele').append('<p>' + tele + '</p>');
-
-            var riskScore = $(variable).data('todo').riskScore;
-            $('#riskScore').empty();
-            $('#riskScore').append('<p>' + riskScore + '</p>');
-
-            var longitude = $(variable).data('todo').longitude;
-            $('#longitude').empty();
-            $('#longitude').text(longitude);
-
-            var latitude = $(variable).data('todo').latitude;
-            $('#latitude').empty();
-            $('#latitude').text(latitude);
-
-            var orderID = $(variable).data('todo').orderID;
-            $('#orderID').empty();
-            $('#orderID').append('<p>' + orderID + '</p>');
-
-            var billValue = $(variable).data('todo').billValue;
-            $('#billValue').empty();
-            $('#billValue').append('<p>' + billValue + '</p>');
-
-            var orderedTimestamp = $(variable).data('todo').orderTimestamp;
-            $('#orderTimestamp').empty();
-            $('#orderTimestamp').append('<p>' + orderedTimestamp + '</p>');
-
-            var status = $(variable).data('todo').orderStatus;
-            $('#orderStatus').empty();
-            if (status == "in_progress") {
-                $('#orderStatus').append('<p style="padding: 5px;background-color: green;width: fit-content;">IN PROGRESS</p>');
-            }
-            else {
-                $('#orderStatus').append('<p style="padding: 5px;background-color: darkred;width: fit-content;">CONFIRMED</p>');
-            }
-
-            var equipCode = $(variable).data('todo').equipCode;
-            $('#equipCode').empty();
-            $('#equipCode').append('<p>' + equipCode + '</p>');
-
-            var equipName = $(variable).data('todo').equipname;
-            $('#equipName').empty();
-            $('#equipName').append('<p>' + equipName + '</p>');
-
-            var unitPrice = $(variable).data('todo').unitPrice;
-            $('#unitPrice').empty();
-            $('#unitPrice').append('<p>' + unitPrice + '</p>');
-
-            var description = $(variable).data('todo').description;
-            $('#description').empty();
-            $('#description').append('<p>' + description + '</p>');
-
-            var deliverTimestamp = $(variable).data('todo').deliverTimestamp;
-            $('#deliverTimestamp').empty();
-            $('#deliverTimestamp').append('<p>' + deliverTimestamp + '</p>');
-
-            var orderCount = $(variable).data('todo').orderCount;
-            $('#orderCount').empty();
-            $('#orderCount').append('<p>' + orderCount + '</p>');
+        $('#confirmModal').on('show.bs.modal', function (event) {
+            var orderDetailID = $(event.relatedTarget).data('id');
+            var id = "save"+orderDetailID;
+            alert(id);
+            $('#save').attr('id', id);
         });
     });
-
     $(document).ready(function () {
-        // $('[data-toggle="modal"]').on('click', function (e) {
-        $('#addInquiry').on('show.bs.modal', function (event) {
+        $('#exampleModalGroupData').on('show.bs.modal', function (event) {
+            var agentID =  $(event.relatedTarget).data('id');
+            var equipID = $(event.relatedTarget).data('todo');
+            var status = $(event.relatedTarget).data('status');
+
             $.ajax({
-                type: 'POST',
-                url: "<?php echo base_url(); ?>index.php/InquiryController/getAgents",
+                type: "POST",
+                url: "<?php echo site_url(); ?>/AdminController/viewOrderDetail",
+                data: {
+                    'agentID': agentID,
+                    'equipID': equipID,
+                    'status':status
+                },
                 success: function (data) {
-                    $('#agent_id_option').empty();
                     var obj = JSON.parse(data);
-                    $('#agent_id_option').append('<option>-- Select --</option>');
+                    console.log(obj);
+                    $('#modalTableBody').empty();
                     for (var i = 0; i < obj.length; i++) {
-                        $('#agent_id_option').append('<option>' + obj[i].agentCode + '</option>');
+
+                        $('#modalTableBody').append('<tr style="text-align:left;">');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+agentID+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+equipID+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].equipName+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].orderDetailID+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].orderCount+'</td>');
+                        if(obj[i].status == 'Order_Placed')
+                        {
+                            $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding:5px;"><button data-toggle="modal" data-id="'+obj[i].orderDetailID+'" type="button" style="background-color: cornflowerblue;color: black;font-weight: bolder;" class="btn btn-default" data-target="#confirmModal">Progress-AD</button></td>');
+                        }
+                        else if(obj[i].status == 'Deliver-Ad')
+                        {
+                            $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button type="button" style="background-color: greenyellow;color: black;font-weight: bolder;" class="btn btn-default">Delivered-AD</button></td>');
+                        }
+                        else if(obj[i].status == 'Deliver-Ag')
+                        {
+                            $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button  type="button" style="background-color: darkgreen;color: black;font-weight: bolder;" class="btn btn-default">Delivered-AG</button></td>');
+                        }
+                        else if(obj[i].status == 'Rejected-Ad')
+                        {
+                            $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button type="button" style="background-color: orangered;color: black;font-weight: bolder;" class="btn btn-default">REJECTED-AD</button></td>');
+                        }
+                        else if(obj[i].status == 'Rejected-Ag')
+                        {
+                            $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button type="button" style="background-color: darkred;color: black;font-weight: bolder;" class="btn btn-default">REJECTED-AG</button></td>');
+                        }
+
+                         $('#modalTableBody').append('</tr>');
                     }
+
                 }
             });
         });
     });
 
-    $('#mapBtn').click(function () {
-        $('#MapDiv').html('<div id="googleMap" style="width:100%;height:400px;"></div>');
-        myMap();
-        // alert('done');
-    });
+        $(document).ready(function () {
+            // $('[data-toggle="modal"]').on('click', function (e) {
+            $('#exampleModal').on('show.bs.modal', function (event) {
+                var bookId = $(event.relatedTarget).data('id');
+                var variable = "#modal" + bookId;
+                var agentCode = $(variable).data('todo').agentCode;
+                $('#agentCode').empty();
+                $('#agentCode').append('<p>' + agentCode + '</p>');
 
-    function myMap() {
+                var agentImage = $(variable).data('todo').imagePath;
+                if (agentImage != "") {
+                    $('#agentImage').attr("src", agentImage);
+                }
 
-        var bounds = new google.maps.LatLngBounds();
-        var latitude = $('#latitude').text();
-        var longitude = $('#longitude').text();
+                var equipImage = $(variable).data('todo').photo;
+                if (equipImage != "") {
+                    $('#equipImage').attr("src", equipImage);
+                }
 
-        var mapProp = {
-            center: new google.maps.LatLng(latitude, longitude),
-            zoom: 14,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        };
-        var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-        var position = new google.maps.LatLng(latitude, longitude);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            title: "markers"
+                var repImage = $(variable).data('todo').repImagePath;
+                if (repImage != "") {
+                    $('#repImage').attr("src", repImage);
+                }
+
+                var agentName = $(variable).data('todo').agentName;
+                $('#agentName').empty();
+                $('#agentName').append('<p>' + agentName + '</p>');
+
+                var address = $(variable).data('todo').address;
+                $('#agentAddress').empty();
+                $('#agentAddress').append('<p>' + address + '</p>');
+
+                var agentContact = $(variable).data('todo').contact;
+                $('#agentContact').empty();
+                $('#agentContact').append('<p>' + agentContact + '</p>');
+
+                var repName = $(variable).data('todo').repName;
+                $('#repName').empty();
+                $('#repName').append('<p>' + repName + '</p>');
+
+                var nic = $(variable).data('todo').nic;
+                $('#nic').empty();
+                $('#nic').append('<p>' + nic + '</p>');
+
+                var shopCode = $(variable).data('todo').shopCode;
+                $('#shopCode').empty();
+                $('#shopCode').append('<p>' + shopCode + '</p>');
+
+                var shopCode = $(variable).data('todo').shopCode;
+                $('#shopCode').empty();
+                $('#shopCode').append('<p>' + shopCode + '</p>');
+
+                var shopName = $(variable).data('todo').shopName;
+                $('#shopName').empty();
+                $('#shopName').append('<p>' + shopName + '</p>');
+
+                var tele = $(variable).data('todo').tele;
+                $('#tele').empty();
+                $('#tele').append('<p>' + tele + '</p>');
+
+                var riskScore = $(variable).data('todo').riskScore;
+                $('#riskScore').empty();
+                $('#riskScore').append('<p>' + riskScore + '</p>');
+
+                var longitude = $(variable).data('todo').longitude;
+                $('#longitude').empty();
+                $('#longitude').text(longitude);
+
+                var latitude = $(variable).data('todo').latitude;
+                $('#latitude').empty();
+                $('#latitude').text(latitude);
+
+                var orderID = $(variable).data('todo').orderID;
+                $('#orderID').empty();
+                $('#orderID').append('<p>' + orderID + '</p>');
+
+                var billValue = $(variable).data('todo').billValue;
+                $('#billValue').empty();
+                $('#billValue').append('<p>' + billValue + '</p>');
+
+                var orderedTimestamp = $(variable).data('todo').orderTimestamp;
+                $('#orderTimestamp').empty();
+                $('#orderTimestamp').append('<p>' + orderedTimestamp + '</p>');
+
+                var status = $(variable).data('todo').status;
+                $('#orderStatus').empty();
+                if (status == "Order_Placed") {
+                    $('#orderStatus').append('<p style="padding: 5px;background-color: cornflowerblue;width: fit-content;">INPROGRESS-AD</p>');
+                }
+                else if(status == "Deliver-Ad") {
+                    $('#orderStatus').append('<p style="padding: 5px;background-color: yellowgreen;width: fit-content;">DELIVERED-AD</p>');
+                }
+                else if(status == "Deliver-Ag") {
+                    $('#orderStatus').append('<p style="padding: 5px;background-color: darkgreen;width: fit-content;">DELIVERED-AG</p>');
+                }
+                else if(status == "Rejected-Ad") {
+                    $('#orderStatus').append('<p style="padding: 5px;background-color: orange;width: fit-content;">REJECTED-AD</p>');
+                }
+                else if(status == "Rejected-Ag") {
+                    $('#orderStatus').append('<p style="padding: 5px;background-color: darkred;width: fit-content;">REJECTED-AG</p>');
+                }
+
+                var equipCode = $(variable).data('todo').equipCode;
+                $('#equipCode').empty();
+                $('#equipCode').append('<p>' + equipCode + '</p>');
+
+                var equipName = $(variable).data('todo').equipname;
+                $('#equipName').empty();
+                $('#equipName').append('<p>' + equipName + '</p>');
+
+                var unitPrice = $(variable).data('todo').unitPrice;
+                $('#unitPrice').empty();
+                $('#unitPrice').append('<p>' + unitPrice + '</p>');
+
+                var description = $(variable).data('todo').description;
+                $('#description').empty();
+                $('#description').append('<p>' + description + '</p>');
+
+                var deliverTimestamp = $(variable).data('todo').deliverTimestamp;
+                $('#deliverTimestamp').empty();
+                $('#deliverTimestamp').append('<p>' + deliverTimestamp + '</p>');
+
+                var orderCount = $(variable).data('todo').orderCount;
+                $('#orderCount').empty();
+                $('#orderCount').append('<p>' + orderCount + '</p>');
+            });
         });
-        // map.fitBounds(bounds);
-    }
+
+        $(document).ready(function () {
+            // $('[data-toggle="modal"]').on('click', function (e) {
+            $('#addInquiry').on('show.bs.modal', function (event) {
+                $.ajax({
+                    type: 'POST',
+                    url: "<?php echo base_url(); ?>index.php/InquiryController/getAgents",
+                    success: function (data) {
+                        $('#agent_id_option').empty();
+                        var obj = JSON.parse(data);
+                        $('#agent_id_option').append('<option>-- Select --</option>');
+                        for (var i = 0; i < obj.length; i++) {
+                            $('#agent_id_option').append('<option>' + obj[i].agentCode + '</option>');
+                        }
+                    }
+                });
+            });
+        });
+
+        $('#mapBtn').click(function () {
+            $('#MapDiv').html('<div id="googleMap" style="width:100%;height:400px;"></div>');
+            myMap();
+            // alert('done');
+        });
+
+        function myMap() {
+
+            var bounds = new google.maps.LatLngBounds();
+            var latitude = $('#latitude').text();
+            var longitude = $('#longitude').text();
+
+            var mapProp = {
+                center: new google.maps.LatLng(latitude, longitude),
+                zoom: 14,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+            var position = new google.maps.LatLng(latitude, longitude);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: "markers"
+            });
+            // map.fitBounds(bounds);
+        }
 
 </script>
 
@@ -1244,8 +1179,17 @@
         });
     }
 
-    function changeStatus($orderID) {
-        alert($orderID);
+    function changeStatus(element) {
+        var id =$(element).attr('id');
+        id = id.substr(4, id.length);
+        $.ajax({
+            type: 'POST',
+            data: 'orderDetailID=' + id,
+            url: "<?php echo base_url(); ?>index.php/AdminController/changeStatus",
+            success: function () {
+location.reload();
+            }
+        });
     }
 
     function setIgnored(clicked_id) {
