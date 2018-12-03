@@ -139,6 +139,9 @@ class LoginController extends CI_Controller
         // Get order data
         $orderdata = $this->OrderModel->getOrderDetailsAdmin($admin_id);
 
+        //get Order data group by agent
+        $grouporderdata = $this->OrderModel->getOrderDetailsAdminGroupByAgent($admin_id);
+
         // Get confirmed order count
         $orderconfirmedcount = $this->OrderModel->getConfirmedOrderCount($admin_id)[0];
 
@@ -163,7 +166,7 @@ class LoginController extends CI_Controller
         //hierarchicalData
         //$alldata = $this->AdminModel->getTableDataInHeirarchicalOrder();
 
-        $data = array(  'admindata' => $admindata, 'orderdata'=>$orderdata,'agentcount'=>$agentcount,'repcount'=>$repcount,'shopcount'=>$shopcount,'orderconfirmedcount'=>$orderconfirmedcount,'orderpendingcount'=>$orderpendingcount,'sentinquirycount'=>$sentinquirycount,'receivedinquirycount'=>$receivedinquirycount ); //,'inquirydata'=>$inquirydata
+        $data = array(  'admindata' => $admindata,'grouporderdata'=>$grouporderdata, 'orderdata'=>$orderdata,'agentcount'=>$agentcount,'repcount'=>$repcount,'shopcount'=>$shopcount,'orderconfirmedcount'=>$orderconfirmedcount,'orderpendingcount'=>$orderpendingcount,'sentinquirycount'=>$sentinquirycount,'receivedinquirycount'=>$receivedinquirycount ); //,'inquirydata'=>$inquirydata
 
         $this->load->view('admin/adminHome', $data);
     }

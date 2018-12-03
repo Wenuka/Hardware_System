@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.5.0/css/all.css'
           integrity='sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU' crossorigin='anonymous'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="../../assets/dist/css/AdminLTE.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -180,7 +181,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Confirmed Orders</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($orderconfirmedcount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($orderconfirmedcount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -194,7 +195,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Pending Orders</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($orderpendingcount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($orderpendingcount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -208,7 +209,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Received Inquiries</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($receivedinquirycount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($receivedinquirycount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -222,7 +223,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Sent Inquiries</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($sentinquirycount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($sentinquirycount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -238,7 +239,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Agents</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($agentcount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($agentcount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -252,7 +253,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Reps</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($repcount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($repcount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -266,7 +267,7 @@
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
                             <p style="margin-bottom: 0;">No Of Shops</p>
-                            <p style="font-size:35px;margin-bottom: 0;"><?php echo ($shopcount->c) ?></p>
+                            <p style="font-size:35px;margin-bottom: 0;"><?php echo($shopcount->c) ?></p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-person-add"></i>
@@ -277,7 +278,7 @@
             </div>
 
             <div class="col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <!-- small box -->
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;">
@@ -300,7 +301,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-6">
+                <div class="col-lg-4 col-md-4">
                     <!-- small box -->
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;">
@@ -318,6 +319,30 @@
                                 </div>
                                 <div class="col-md-4">
                                     <i class="fa fa-times" style="font-size:48px;color:red"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <!-- small box -->
+                    <div class="small-box " style="padding: 1%;">
+                        <div class="inner" style="color: #555555;background-color: white;">
+                            <div class="col-md-12">
+                                <p style="font-size: 32px;">Equipments</p>
+                            </div>
+                            <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
+                            <div class="row" style="padding:0 20px 0 20px;">
+                                <div class="col-md-4">
+                                    <a href="#addInquiry" data-toggle="modal">
+                                        <i class="fa fa-plus-square-o"
+                                           style="font-size:48px;color:red"></i></a>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fa fa-check-square-o" style="font-size:48px;color:red"></i>
+                                </div>
+                                <div class="col-md-4">
+                                    <i class="fa fa-minus-square-o" style="font-size:48px;color:red"></i>
                                 </div>
                             </div>
                         </div>
@@ -356,7 +381,6 @@
                                         <tbody id="workorderTable" style="text-align: center;font-size:13px;">
                                         <?php
                                         if (sizeof($orderdata) > 0) {
-                                            print_r($orderdata);
                                             for ($i = 0; $i < sizeof($orderdata); $i++) {
 
 //	                                                    ?>
@@ -368,15 +392,86 @@
                                                     <td style="border-right:1px solid #f4f4f4;width: 4px"><?php echo $orderdata[$i]->orderCount; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->orderTimestamp; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->deliverTimestamp; ?></td>
-                                                    <?php if ($orderdata[$i]->orderStatus == "in_progress") {?>
-                                                       <td><button type="button" onclick="changeStatus('<?php echo $orderdata[$i]->orderID; ?>')" style="background-color: green;color: black;font-weight: bolder;" class="btn btn-default">PROGRESS</button></td>';
-                                                    <?php } else {?>
-                                                       <td><button  type="button" style="background-color: red;color: black;font-weight: bolder;" disabled="true" class="btn btn-default">CONFIRMED</button></td>';
-                                                   <?php  }
-                                                    ?></td>
+                                                    <?php if ($orderdata[$i]->orderStatus == "in_progress") { ?>
+                                                        <td>
+                                                            <button type="button"
+                                                                    onclick="changeStatus('<?php echo $orderdata[$i]->orderID; ?>')"
+                                                                    style="background-color: green;color: black;font-weight: bolder;"
+                                                                    class="btn btn-default">PROGRESS
+                                                            </button>
+                                                        </td>
+                                                    <?php } else { ?>
+                                                    <td>
+                                                        <button type="button"
+                                                                style="background-color: red;color: black;font-weight: bolder;"
+                                                                disabled="true" class="btn btn-default">CONFIRMED
+                                                        </button>
+                                                    </td>
+                                                    <?php }
+                                                    ?>
                                                     <td style="border-right:1px solid #f4f4f4;width: 10px">
-                                                        <a href="#exampleModal" id='<?php echo $orderdata[$i]->orderDetailID; ?>' data-id='<?php echo $orderdata[$i]->orderDetailID; ?>' data-toggle="modal"
-                                                           data-todo='<?php echo json_encode($orderdata[$i]) ?>'>More Details</a>
+                                                        <a href="#exampleModal"
+                                                           id='<?php echo "modal" . $orderdata[$i]->orderDetailID; ?>'
+                                                           data-id='<?php echo $orderdata[$i]->orderDetailID; ?>'
+                                                           data-toggle="modal"
+                                                           data-todo='<?php echo json_encode($orderdata[$i]) ?>'>More
+                                                            Details</a>
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        } ?>
+                                        </tbody>
+                                    </table>
+                                    <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </section>
+        <section class="content" id="content" style="padding-right:2%;padding-left:2%;">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="content_lg" style="padding: 0;">
+                <div class="col-lg-12 col-md-12 col-sm-12" id="content_10">
+                    <?php //include 'adminTop.php'; ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="about_web" class="box box-solid"
+                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
+                                <div class="box-header with-border" style="text-align: center;">
+                                    <h3 class="box-title"
+                                        style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">
+                                        Recent Orders Group by Agent and Equipment </h3>
+                                </div>
+                                <div class="box-body" style="padding:0 4%;">
+                                    <br>
+                                    <table id="ordertable" class="table table-striped nowrap table-responsive"
+                                           cellspacing="0" width="100%">
+                                        <thead class="no-border">
+                                        <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
+                                            <th data-priority="2">Agent ID</th>
+                                            <th data-priority="2">Equipment ID</th>
+                                            <th data-priority="2">Order Count</th>
+                                            <th data-priority="1">Status</th>
+                                            <th data-priority="1" style="max-width:90px;">More Details</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="workorderTable" style="text-align: center;font-size:13px;">
+                                        <?php
+                                        if (sizeof($grouporderdata) > 0) {
+                                            for ($i = 0; $i < sizeof($grouporderdata); $i++) {
+
+//	                                                    ?>
+                                                <tr style="text-align:left;"
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->agentID; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipID . "  -  " . $grouporderdata[$i]->equipCode; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;width: 4px"><?php echo $grouporderdata[$i]->orderCount; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;width: 10px">
+                                                        <p id="agentIDGroup" style="display: none;"><?php echo $grouporderdata[$i]->agentID; ?></p>
+                                                        <p id="equipIDGroup" style="display: none;"><?php echo $grouporderdata[$i]->equipID; ?></p>
+                                                        <a href="#exampleModalGroupData">More
+                                                            Details</a>
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -398,6 +493,192 @@
     ?>
 </div>
 <!-- Modal -->
+<div class="modal fade" id="" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Order Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="font-size: 15px;">
+                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
+                        Order Details
+                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <img src="../../assets/images/admin/avatar.png" id="equipImage"
+                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
+                             alt="Equipment Image">
+                    </div>
+                    <br>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Equip Code
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="equipCode">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Equip Name
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="equipName">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Unit Price
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="unitPrice">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Order Count
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="orderCount">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Deliver Date
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="deliverTimestamp">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Description
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="description">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Order ID
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="orderID">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Bill Value(LKR)
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="billValue">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Ordered Date
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="orderTimestamp">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Order Status
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="orderStatus">
+
+                    </div>
+                </div>
+                <br>
+                <div class="row" style="font-size: 15px;">
+                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
+                        Agent Details
+                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <img src="../../assets/images/admin/avatar.png" id="agentImage"
+                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
+                             alt="Agent Image">
+                    </div>
+                    <br>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Agent Code
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="agentCode">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Agent Name
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="agentName">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Agent Address
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="agentAddress">
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Agent Contact
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="agentContact">
+
+                    </div>
+                </div>
+                <br>
+                <div class="row" style="font-size: 15px;">
+                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
+                        Rep Details
+                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
+                    </div>
+                    <div class="col-lg-12 col-md-12">
+                        <img src="../../assets/images/admin/avatar.png" id="repImage"
+                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
+                             alt="Rep Image">
+                    </div>
+                    <br>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Rep Name
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="repName">
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Nic Number
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="nic">
+
+                    </div>
+                </div>
+                <br>
+                <div class="row" style="font-size: 15px;">
+                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
+                        Shop Details
+                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Shop Code
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="shopCode">
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Shop Name
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="shopName">
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Shop Contact
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="tele">
+                    </div>
+                    <div class="col-lg-3 col-md-3 modalLbl">
+                        Risk Score
+                    </div>
+                    <div class="col-lg-3 col-md-3" id="riskScore">
+                    </div>
+                    <div class="col-lg-12 col-md-12 modalLbl">
+                        Shop Address
+                    </div>
+                    <div class="col-lg-12 col-md-12" id="shopAddress">
+                        <p id="longitude" style="display: none;"></p>
+                        <p id="latitude" style="display: none;"></p>
+                        <button id="mapBtn" style="margin: 10px 0;">Load Map</button>
+                        <br>
+                        <!-- <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7922.625388456117!2d79.908538633914!3d6.8530716618097545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTEnMTEuMSJOIDc5wrA1NCc0Ni41IkU!5e0!3m2!1sen!2slk!4v1463212794605"></iframe><br><small><a href="https://www.google.lk/maps/place/6%C2%B051'11.1%22N+79%C2%B054'46.5%22E/@<?php //echo $commondetails->longitude; ?>,<?php //echo $commondetails->latitude; ?>,16z/data=!4m5!3m4!1s0x0:0x0!8m2!3d6.853069!4d79.912916" ><b></b></a></small> -->
+                        <div id="MapDiv"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -610,7 +891,8 @@
                                             <!-- <br> -->
                                             <div class="form-group">
                                                 <label for="exampleInputEmail1">Agent Code</label>
-                                                <input type="text" name="agentCode" class="form-control" placeholder="Agent Code"
+                                                <input type="text" name="agentCode" class="form-control"
+                                                       placeholder="Agent Code"
                                                        required/>
                                             </div>
                                             <div class="form-group">
@@ -725,16 +1007,24 @@
 </div>
 
 <script>
-
+    $.ajax({
+        type: "POST",
+        url: "<?php echo site_url(); ?>/AdminController/addNewAgent",
+        data: {
+            'agentID': $('#agentIDGroup').val,
+            'equipID':$('#equipIDGroup').valexampleModalGroupData
+        },
+        success: function(msg)
+        {
+            $("#exampleModalGroupData").modal("toggle");
+            console.log(msg);
+        }
+    });
     $(document).ready(function () {
         // $('[data-toggle="modal"]').on('click', function (e) {
         $('#exampleModal').on('show.bs.modal', function (event) {
             var bookId = $(event.relatedTarget).data('id');
-            bookId = ""+bookId;
-            var numb = bookId.match(/\d/g);
-            numb = numb.join("");
-            var variable = "#"+numb;
-            alert(variable);
+            var variable = "#modal" + bookId;
             var agentCode = $(variable).data('todo').agentCode;
             $('#agentCode').empty();
             $('#agentCode').append('<p>' + agentCode + '</p>');
@@ -954,8 +1244,7 @@
         });
     }
 
-    function changeStatus($orderID)
-    {
+    function changeStatus($orderID) {
         alert($orderID);
     }
 

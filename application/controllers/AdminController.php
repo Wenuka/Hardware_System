@@ -56,6 +56,28 @@ class AdminController extends CI_Controller
         }
     }
 
+    public function viewOrderDetail(){
+        $this->load->model('OrderModel');
+        $agentID = $_POST['agentID']; //merchant code
+        $equipid = $_POST['transactionId'];
+        if (isset($_SESSION['usertype'])) {
+            if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no'])) {
+                $admin_id = $_SESSION['admin_no'];
+                $grouporderdata = $this->OrderModel->retreiveOrderDetails($admin_id,$agentID,$equipid);
+                echo json_encode($grouporderdata);
+            }else {
+                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
+                redirect();
+            }
+        } else {
+            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
+            redirect();
+        }
+        //get Order data group by agent
+
+
+    }
+
     public function viewReps()
     {
         $this->load->model('AdminModel');

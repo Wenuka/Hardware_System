@@ -13,10 +13,50 @@ class OrderModel extends CI_Model
         $this->db->where('agent.adminID', $adminID);
         $this->db->from('agent');
         $this->db->join('rep', 'agent.agentID = rep.agentID');
-        $this->db->join('orders', 'orders.repID = rep.repID');
-        $this->db->join('shop', 'orders.shopID = shop.shopID');
+        $this->db->join('shop', 'rep.repID = shop.repID');
+        $this->db->join('orders', 'orders.repID = rep.repID AND orders.shopID = shop.shopID');
         $this->db->join('order_details', 'orders.orderID = order_details.orderID');
         $this->db->join('equipment', 'equipment.equipID = order_details.equipID');
+        $this->db->order_by('agent.agentID, equipment.equipID', 'asc');
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            return $query1->result();    // return a array of object
+        } else {
+            return NULL;
+        }
+    }
+
+    function getOrderDetailsAdminGroupByAgent($adminID)
+    {
+        $this->db->select('SUM(d.orderCount) as orderCount,a.agentID,a.agentCode,e.*,d.status');
+        $this->db->where('a.adminID', $adminID);
+        $this->db->from('agent a');
+        $this->db->join('rep r', 'a.agentID = r.agentID');
+        $this->db->join('orders t', 't.repID = r.repID');
+        $this->db->join('order_details d', 't.orderID = d.orderID');
+        $this->db->join('equipment e', 'e.equipID = d.equipID');
+        $this->db->group_by('a.agentID, e.equipID, d.status');
+        $this->db->order_by('a.agentID, e.equipID', 'asc');
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            return $query1->result();    // return a array of object
+        } else {
+            return NULL;
+        }
+    }
+
+
+    function retreiveOrderDetails($adminID,$agentID,$equipID)
+    {
+        $this->db->select('e.*,a.*,d.*');
+        $this->db->where('a.adminID', $adminID);
+        $this->db->where('a.agentID', $agentID);
+        $this->db->where('e.equipID', $equipID);
+        $this->db->from('agent a');
+        $this->db->join('rep r', 'a.agentID = r.agentID');
+        $this->db->join('orders t', 't.repID = r.repID');
+        $this->db->join('order_details d', 't.orderID = d.orderID');
+        $this->db->join('equipment e', 'e.equipID = d.equipID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
             return $query1->result();    // return a array of object

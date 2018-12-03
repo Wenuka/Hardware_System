@@ -560,3 +560,17 @@ ERROR - 2018-12-02 22:16:22 --> Severity: Notice --> Undefined property: stdClas
 ERROR - 2018-12-02 22:16:22 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
 ERROR - 2018-12-02 22:16:43 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
 ERROR - 2018-12-02 22:16:43 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 22:57:15 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 22:57:15 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 23:03:13 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 23:03:13 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 23:23:58 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 23:23:58 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 23:24:37 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 23:24:37 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 23:27:10 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 23:27:10 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 23:28:07 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 23:28:07 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82
+ERROR - 2018-12-02 23:29:00 --> Severity: Notice --> Undefined property: stdClass::$name D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 81
+ERROR - 2018-12-02 23:29:00 --> Severity: Notice --> Undefined property: stdClass::$admin_id D:\wamp\www\Hardware_System\application\views\admin\adminTopMost.php 82

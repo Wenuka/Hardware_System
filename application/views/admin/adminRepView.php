@@ -132,7 +132,7 @@
                              style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;height: 100%;">
                             <div class="box-header with-border" style="text-align: center;">
                                 <h3 class="box-title"
-                                    style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;"><?php echo "$rep->repID<br>"; ?></h3>
+                                    style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;"><?php echo "$rep->repCode<br>"; ?></h3>
                             </div>
                             <div class="box-body" style="padding:4%;">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
@@ -143,7 +143,7 @@
                                     <h5 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$rep->contact<br>"; ?></h5>
                                     <div style="text-align: center;">
-                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default">More details</button>
+                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default" data-todo='<?php  echo json_encode($rep) ?>' id='<?php echo $rep->repID; ?>' data-id='<?php echo $rep->repID;  ?>'  data-toggle="modal" data-target="#repModal">More details</button>
                                     </div>
                                 </div>
                             </div>
@@ -155,11 +155,145 @@
             <!-- Small boxes (Stat box) -->
             <br>
         </section>
+        <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Agent Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row" style="font-size: 15px;">
+                            <div class="col-lg-4 col-md-4">
+                                <img src="../../assets/images/admin/avatar.png" id="repImage"
+                                     style='border-radius: 100%;max-height:140px;max-width:140px;' class="img-circle"
+                                     alt="Agent Image">
+                            </div>
+                            <div class="col-lg-8 col-md-8">
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Rep Code
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="repCode">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Rep Name
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="repName">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Agent ID
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="agentID">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Contact
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="contact">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Email
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="email">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Status
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="status">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Added Date
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="addedDate">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                   NIC
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="nic">
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <?php
     include 'footer.html';
     ?>
 </div>
+
+<script>
+    $(document).ready(function () {
+        // $('[data-toggle="modal"]').on('click', function (e) {
+        $('#repModal').on('show.bs.modal', function (event) {
+            var bookId = $(event.relatedTarget).data('id');
+            var variable = "#"+bookId;
+            var repCode = $(variable).data('todo').repCode;
+            $('#repCode').empty();
+            $('#repCode').append('<p>' + repCode + '</p>');
+
+            var repImage = $(variable).data('todo').imagePath;
+            if (agentImage != "") {
+                $('#agentImage').attr("src", agentImage);
+            }
+
+            var equipImage = $(variable).data('todo').photo;
+            if (equipImage != "") {
+                $('#equipImage').attr("src", equipImage);
+            }
+
+            var repImage = $(variable).data('todo').repImagePath;
+            if (repImage != "") {
+                $('#repImage').attr("src", repImage);
+            }
+
+            var agentName = $(variable).data('todo').agentName;
+            $('#agentName').empty();
+            $('#agentName').append('<p>' + agentName + '</p>');
+
+            var address = $(variable).data('todo').address;
+            $('#agentAddress').empty();
+            $('#agentAddress').append('<p>' + address + '</p>');
+
+            var agentContact = $(variable).data('todo').contact;
+            $('#agentContact').empty();
+            $('#agentContact').append('<p>' + agentContact + '</p>');
+
+            var email = $(variable).data('todo').email;
+            $('#email').empty();
+            $('#email').append('<p>' + email + '</p>');
+
+            var town = $(variable).data('todo').town;
+            $('#town').empty();
+            $('#town').append('<p>' + town + '</p>');
+
+            var province = $(variable).data('todo').province;
+            $('#province').empty();
+            $('#province').append('<p>' + province + '</p>');
+
+            var status = $(variable).data('todo').status;
+            $('#status').empty();
+            $('#status').append('<p>' + status + '</p>');
+
+            var addedDate = $(variable).data('todo').addedDate;
+            $('#addedDate').empty();
+            $('#addedDate').append('<p>' + addedDate + '</p>');
+        });
+    });
+</script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
