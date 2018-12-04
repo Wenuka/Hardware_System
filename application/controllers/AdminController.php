@@ -168,6 +168,7 @@ class AdminController extends CI_Controller
 
     public function viewInquiries()
     {
+        $this->load->model('InquiryModel');
         $this->load->library('session');
         $this->load->library('Constants');
         if (isset($_SESSION['usertype'])) {
@@ -175,9 +176,11 @@ class AdminController extends CI_Controller
                 $admin_id = $_SESSION['admin_no'];
                 // $this->load->model('LoginModel');
                 $this->load->model('AdminModel');
-                $admindata = $this->AdminModel->adminData($admin_id)[0];
-                $inquirydata = $this->AdminModel->inquiryData();
-                $data = array('admindata' => $admindata, 'inquirydata' => $inquirydata);
+                $sentInquiryType = "AdAg";
+                $receivedInquiryType = "AgAd";
+                $sentinquirydata = $this->InquiryModel->getSentInquiriesAdmin($sentInquiryType,$admin_id);
+                $receivedinquirydata = $this->InquiryModel->getReceivedInquiriesAdmin($receivedInquiryType,$admin_id);
+                $data = array( 'sentinquirydata' => $sentinquirydata,'receivedinquirydata'=>$receivedinquirydata );
                 $this->load->view('admin/inquiry', $data);
             } else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";

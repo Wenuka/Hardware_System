@@ -77,10 +77,13 @@
     <style>
         .modalLbl {
             font-weight: bolder;
+            color: dimgrey;
+            font-size: small;
         }
 
         .modalTxt {
-
+            color: dimgrey;
+            font-size: small;
         }
 
         /*jssor slider loading skin spin css*/
@@ -364,12 +367,12 @@
                                 </div>
                                 <div class="box-body" style="padding:0 4%;">
                                     <br>
-                                    <table id="ordertable" class="table table-striped nowrap table-responsive"
+                                    <table id="groupOrdersTable" class="table table-striped nowrap table-responsive"
                                            cellspacing="0" width="100%">
                                         <thead class="no-border">
                                         <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                                            <th data-priority="2">Agent ID</th>
-                                            <th data-priority="2">Equipment ID</th>
+                                            <th data-priority="2">Agent Code</th>
+                                            <th data-priority="2">Equipment Code</th>
                                             <th data-priority="2">Equipment Name</th>
                                             <th data-priority="2">Order Count</th>
                                             <th data-priority="1">Status</th>
@@ -383,8 +386,8 @@
 
 //	                                                    ?>
                                                 <tr style="text-align:left;">
-                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->agentID; ?></td>
-                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipID . "  -  " . $grouporderdata[$i]->equipCode; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->agentCode; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipCode . "  -  " . $grouporderdata[$i]->equipCode; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipName; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->orderCount; ?></td>
                                                     <?php if($grouporderdata[$i]->status == "Order_Placed"){?>
@@ -399,8 +402,9 @@
                                                     <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: darkred;width:20px;">REJECTED-AG</td>
                                                     <?php } ?>
                                                     <td style="border-right:1px solid #f4f4f4;">
-                                                        <a href="#exampleModalGroupData" data-toggle="modal" data-status="<?php echo $grouporderdata[$i]->status; ?>" data-todo="<?php echo $grouporderdata[$i]->equipID; ?>" data-id='<?php echo $grouporderdata[$i]->agentID; ?>'>More
-                                                            Details</a>
+                                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default"
+                                                                data-toggle="modal" data-status="<?php echo $grouporderdata[$i]->status; ?>" data-todo="<?php echo $grouporderdata[$i]->equipID; ?>" data-id='<?php echo $grouporderdata[$i]->agentID; ?>'
+                                                                data-target="#exampleModalGroupData">More details</button>
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -431,7 +435,7 @@
                                 </div>
                                 <div class="box-body" style="padding:0 4%;">
                                     <br>
-                                    <table id="ordertable" class="table table-striped nowrap table-responsive"
+                                    <table id="nonGroupedDetailTable" class="table table-striped nowrap table-responsive"
                                            cellspacing="0" width="100%">
                                         <thead class="no-border">
                                         <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
@@ -477,12 +481,12 @@
                                                     <?php }
                                                     ?>
                                                     <td style="border-right:1px solid #f4f4f4;width: 10px">
-                                                        <a href="#exampleModal"
-                                                           id='<?php echo "modal" . $orderdata[$i]->orderDetailID; ?>'
-                                                           data-id='<?php echo $orderdata[$i]->orderDetailID; ?>'
-                                                           data-toggle="modal"
-                                                           data-todo='<?php echo json_encode($orderdata[$i]) ?>'>More
-                                                            Details</a>
+                                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default"
+                                                                id='<?php echo "modal" . $orderdata[$i]->orderDetailID; ?>'
+                                                                data-id='<?php echo $orderdata[$i]->orderDetailID; ?>'
+                                                                data-toggle="modal"
+                                                                data-todo='<?php echo json_encode($orderdata[$i]) ?>'
+                                                                data-target="#exampleModal">More details</button>
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -517,15 +521,17 @@
             <div class="modal-body">
                 <div class="box-body" style="padding:0 4%;">
                     <br>
-                    <table id="ordertable" class="table table-striped nowrap table-responsive"
+                    <div class="table-responsive">
+                    <table id="groupOrdersTableModal" class="table table-striped nowrap table-responsive"
                            cellspacing="0" width="100%">
                         <thead class="no-border">
                         <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                            <th data-priority="2">Agent ID</th>
-                            <th data-priority="2">Equipment ID</th>
+                            <th data-priority="2" style="width: 5px;">Agent ID</th>
+                            <th data-priority="2" style="width: 5px;">Equipment ID</th>
                             <th data-priority="2">Equipment Name</th>
-                            <th data-priority="2">Order Detail ID</th>
+                            <th data-priority="2" style="width: 5px;">Order Detail ID</th>
                             <th data-priority="1" >Order Count</th>
+                            <th data-priority="1" >More Details</th>
                             <th data-priority="1">Status</th>
                         </tr>
                         </thead>
@@ -534,6 +540,7 @@
                         </tbody>
                     </table>
                     <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
+                    </div>
                 </div>
             </div>
         </div>
@@ -912,11 +919,12 @@
                     for (var i = 0; i < obj.length; i++) {
 
                         $('#modalTableBody').append('<tr style="text-align:left;">');
-                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+agentID+'</td>');
-                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+equipID+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;width: 5px;">'+agentID+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;width: 5px;">'+equipID+'</td>');
                         $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].equipName+'</td>');
-                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].orderDetailID+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;width: 5px;">'+obj[i].orderDetailID+'</td>');
                         $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].orderCount+'</td>');
+                        $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding:5px;"><button type="button" style="margin-bottom: 3%;" class="btn btn-default" id ="modal"'+obj[i].orderDetailID+' data-id="'+obj[i].orderDetailID+'" data-toggle="modal" data-todo="'+obj[i]+'" data-target="#exampleModal">More details</button></td>');
                         if(obj[i].status == 'Order_Placed')
                         {
                             $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding:5px;"><button data-toggle="modal" data-id="'+obj[i].orderDetailID+'" type="button" style="background-color: cornflowerblue;color: black;font-weight: bolder;" class="btn btn-default" data-target="#confirmModal">Progress-AD</button></td>');
@@ -1150,13 +1158,19 @@
 <script src="https://cdn.datatables.net/responsive/2.1.1/js/dataTables.responsive.min.js"></script>
 <script src="https://cdn.datatables.net/responsive/2.1.1/js/responsive.bootstrap.min.js"></script>
 <script>
+
     $(document).ready(function () {
-        var table_checkin = $('#ordertable').DataTable({
+        $('#orderDetailTable').DataTable({
             responsive: true
         });
     });
     $(document).ready(function () {
-        var table_checkin = $('#worktable').DataTable({
+       $('#nonGroupedDetailTable').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function () {
+        $('#groupOrdersTableModal').DataTable({
             responsive: true
         });
     });

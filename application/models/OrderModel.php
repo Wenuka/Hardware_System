@@ -14,7 +14,7 @@ class OrderModel extends CI_Model
         $this->db->from('agent');
         $this->db->join('rep', 'agent.agentID = rep.agentID');
         $this->db->join('shop', 'rep.repID = shop.repID');
-        $this->db->join('orders', 'orders.repID = rep.repID AND orders.shopID = shop.shopID');
+        $this->db->join('orders', 'orders.shopID = shop.shopID');
         $this->db->join('order_details', 'orders.orderID = order_details.orderID');
         $this->db->join('equipment', 'equipment.equipID = order_details.equipID');
         $this->db->order_by('agent.agentID, equipment.equipID', 'asc');
@@ -32,7 +32,8 @@ class OrderModel extends CI_Model
         $this->db->where('a.adminID', $adminID);
         $this->db->from('agent a');
         $this->db->join('rep r', 'a.agentID = r.agentID');
-        $this->db->join('orders t', 't.repID = r.repID');
+        $this->db->join('shop s', 'r.repID = s.repID');
+        $this->db->join('orders t', 't.shopID = s.shopID');
         $this->db->join('order_details d', 't.orderID = d.orderID');
         $this->db->join('equipment e', 'e.equipID = d.equipID');
         $this->db->group_by('a.agentID, e.equipID, d.status');
@@ -55,7 +56,8 @@ class OrderModel extends CI_Model
         $this->db->where('d.status', $status);
         $this->db->from('agent a');
         $this->db->join('rep r', 'a.agentID = r.agentID');
-        $this->db->join('orders t', 't.repID = r.repID');
+        $this->db->join('shop s', 'r.repID = s.repID');
+        $this->db->join('orders t', 't.shopID = s.shopID');
         $this->db->join('order_details d', 't.orderID = d.orderID');
         $this->db->join('equipment e', 'e.equipID = d.equipID');
         $query1 = $this->db->get();
@@ -82,7 +84,8 @@ class OrderModel extends CI_Model
         $this->db->where('order_details.status', 'Deliver-Ad');
         $this->db->from('agent');
         $this->db->join('rep', 'agent.agentID = rep.agentID');
-        $this->db->join('orders', 'orders.repID = rep.repID');
+        $this->db->join('shop s', 'rep.repID = s.repID');
+        $this->db->join('orders t', 't.shopID = s.shopID');
         $this->db->join('order_details', 'orders.orderID = order_details.orderID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
@@ -99,7 +102,8 @@ class OrderModel extends CI_Model
         $this->db->where('order_details.status', 'Order_Placed');
         $this->db->from('agent');
         $this->db->join('rep', 'agent.agentID = rep.agentID');
-        $this->db->join('orders', 'orders.repID = rep.repID');
+        $this->db->join('shop s', 'rep.repID = s.repID');
+        $this->db->join('orders t', 't.shopID = s.shopID');
         $this->db->join('order_details', 'orders.orderID = order_details.orderID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
@@ -108,6 +112,25 @@ class OrderModel extends CI_Model
             return NULL;
         }
     }
+/*----------------------------Agent Home Page-----------------------------------------*/
 
+    function getOrderDetailsRequiredToAdmin($agentID)
+    {
+        $this->db->select('SUM(d.orderCount) as orderCount,r.repID,r.repCode,e.*,d.status');
+        $this->db->where('r.agentID', $agentID);
+        $this->db->from('rep r');
+        $this->db->join('shop s', 'r.repID = s.repID');
+        $this->db->join('orders t', 't.shopID = s.shopID');
+        $this->db->join('order_details d', 't.orderID = d.orderID');
+        $this->db->join('equipment e', 'e.equipID = d.equipID');
+        $this->db->group_by('e.equipID, d.status');
+        $this->db->order_by('e.equipID', 'asc');
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            return $query1->result();    // return a array of object
+        } else {
+            return NULL;
+        }
+    }
 
 }

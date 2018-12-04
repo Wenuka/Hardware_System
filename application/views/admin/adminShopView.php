@@ -72,6 +72,16 @@
     </script>
 
     <style>
+        .modalLbl {
+            font-weight: bolder;
+            color: dimgrey;
+            font-size: small;
+        }
+
+        .modalTxt {
+            color: dimgrey;
+            font-size: small;
+        }
         /*jssor slider loading skin spin css*/
         .jssorl-009-spin img {
             animation-name: jssorl-009-spin;
@@ -141,7 +151,7 @@
                                     <h5 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$shop->tele<br>"; ?></h5>
                                     <div style="text-align: center;">
-                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default">More details</button>
+                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default" data-todo='<?php  echo json_encode($shop) ?>' id='<?php echo $shop->shopID; ?>' data-id='<?php echo $shop->shopID;  ?>' data-toggle="modal" data-target="#shopModal">More details</button>
                                     </div>
                                 </div>
                             </div>
@@ -153,12 +163,261 @@
             <!-- Small boxes (Stat box) -->
             <br>
         </section>
+        <div class="modal fade" id="shopModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Shop Details</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row" style="font-size: 15px;">
+
+                            <div class="col-lg-12 col-md-12">
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Shop Code
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="shopCode">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Shop Name
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="shopName">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Rep ID
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="repID">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Tele
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="tele">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Mobile
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="mobile">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="emailLbl" >
+                                    Email
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="email">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Risk Score
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="riskScore">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Size
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="size">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="ownerNameLbl">
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="ownerName">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Status
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="status">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="addedDateLbl">
+                                    Added Date
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="addedDate">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="chequeReturnLbl">
+                                    Cheque Return
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="chequeReturn">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="creditLimitLbl">
+                                    Credit Limit
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="creditLimit">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="lastPendingBillLbl">
+                                    Last Pending Bill
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="lastPendingBill">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl" id="lastPendingBillDateLbl">
+                                    Last Pending Bill Date
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="lastPendingBillDate">
+
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalLbl">
+                                    Shop Address
+                                </div>
+                                <div class="col-lg-6 col-md-6 modalTxt" id="shopAddress">
+
+                                </div>
+                                <div class="col-lg-12 col-md-12 modalTxt">
+                                    <p id="longitude" style="display: none;"></p>
+                                    <p id="latitude" style="display: none;"></p>
+                                    <button id="mapBtn" style="margin: 10px 0;">Load Map</button>
+                                    <br>
+                                    <!-- <iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7922.625388456117!2d79.908538633914!3d6.8530716618097545!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwNTEnMTEuMSJOIDc5wrA1NCc0Ni41IkU!5e0!3m2!1sen!2slk!4v1463212794605"></iframe><br><small><a href="https://www.google.lk/maps/place/6%C2%B051'11.1%22N+79%C2%B054'46.5%22E/@<?php //echo $commondetails->longitude; ?>,<?php //echo $commondetails->latitude; ?>,16z/data=!4m5!3m4!1s0x0:0x0!8m2!3d6.853069!4d79.912916" ><b></b></a></small> -->
+                                    <div id="MapDiv"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <?php
     include 'footer.html';
     ?>
 </div>
+<script>
+    $(document).ready(function () {
+        // $('[data-toggle="modal"]').on('click', function (e) {
+        $('#shopModal').on('show.bs.modal', function (event) {
+            var bookId = $(event.relatedTarget).data('id');
+            var variable = "#"+bookId;
+            var shopCode = $(variable).data('todo').shopCode;
+            $('#shopCode').empty();
+            $('#shopCode').append('<p>' + shopCode + '</p>');
 
+            var shopName = $(variable).data('todo').shopName;
+            $('#shopName').empty();
+            $('#shopName').append('<p>' + shopName + '</p>');
+
+            var repID = $(variable).data('todo').repID;
+            $('#repID').empty();
+            $('#repID').append('<p>' + repID + '</p>');
+
+            var address = $(variable).data('todo').address;
+            $('#shopAddress').empty();
+            $('#shopAddress').append('<p>' + address + '</p>');
+
+            var longitude = $(variable).data('todo').longitude;
+            $('#longitude').empty();
+            $('#longitude').text(longitude);
+
+            var latitude = $(variable).data('todo').latitude;
+            $('#latitude').empty();
+            $('#latitude').text(latitude);
+
+            //
+            var tele = $(variable).data('todo').tele;
+            $('#tele').empty();
+            $('#tele').append('<p>' + tele + '</p>');
+
+            var mobile = $(variable).data('todo').mobile;
+            $('#mobile').empty();
+            $('#mobile').append('<p>' + mobile + '</p>');
+            //
+            var email = $(variable).data('todo').email;
+            if(email == "")$('emailLbl').attr("display", "none");
+            $('#email').empty();
+            $('#email').append('<p>' + email + '</p>');
+            //
+            var nic = $(variable).data('todo').nic;
+            $('#nic').empty();
+            $('#nic').append('<p>' + nic + '</p>');
+
+            var status = $(variable).data('todo').status;
+            $('#status').empty();
+            $('#status').append('<p>' + status + '</p>');
+
+            var addedDate = $(variable).data('todo').addedDate;
+            $('#addedDate').empty();
+            $('#addedDate').append('<p>' + addedDate + '</p>');
+
+            var riskScore = $(variable).data('todo').riskScore;
+            $('#riskScore').empty();
+            $('#riskScore').append('<p>' + riskScore + '</p>');
+
+            var size = $(variable).data('todo').size;
+            $('#size').empty();
+            $('#size').append('<p>' + size + '</p>');
+
+            var ownerName = $(variable).data('todo').ownerName;
+            if(ownerName == "")$('ownerNameLbl').attr("display", "none");
+            $('#ownerName').empty();
+            $('#ownerName').append('<p>' + ownerName + '</p>');
+
+            var chequeReturn = $(variable).data('todo').chequeReturn;
+            if(chequeReturn == "")$('chequeReturnLbl').attr("display", "none");
+            $('#chequeReturn').empty();
+            $('#chequeReturn').append('<p>' + chequeReturn + '</p>');
+
+            var creditLimit = $(variable).data('todo').creditLimit;
+            if(creditLimit == "")$('creditLimitLbl').attr("display", "none");
+            $('#creditLimit').empty();
+            $('#creditLimit').append('<p>' + creditLimit + '</p>');
+
+            var lastPendingBill = $(variable).data('todo').lastPendingBill;
+            if(lastPendingBill == "")$('lastPendingBillLbl').attr("display", "none");
+            $('#lastPendingBill').empty();
+            $('#lastPendingBill').append('<p>' + lastPendingBill + '</p>');
+
+            var lastPendingBillDate = $(variable).data('todo').lastPendingBillDate;
+            if(lastPendingBillDate == "")$('lastPendingBillDateLbl').attr("display", "none");
+            $('#lastPendingBillDate').empty();
+            $('#lastPendingBillDate').append('<p>' + lastPendingBillDate + '</p>');
+
+
+        });
+    });
+</script>
+<script>
+$('#mapBtn').click(function () {
+$('#MapDiv').html('<div id="googleMap" style="width:100%;height:400px;"></div>');
+myMap();
+// alert('done');
+});
+
+function myMap() {
+
+var bounds = new google.maps.LatLngBounds();
+var latitude = $('#latitude').text();
+var longitude = $('#longitude').text();
+
+var mapProp = {
+center: new google.maps.LatLng(latitude, longitude),
+zoom: 14,
+mapTypeId: google.maps.MapTypeId.ROADMAP
+};
+var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+var position = new google.maps.LatLng(latitude, longitude);
+bounds.extend(position);
+marker = new google.maps.Marker({
+position: position,
+map: map,
+title: "markers"
+});
+// map.fitBounds(bounds);
+}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlFwHhg15iNpuqL5psZs8TVXMbtrwRUJo"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);

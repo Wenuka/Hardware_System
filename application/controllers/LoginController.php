@@ -171,9 +171,55 @@ class LoginController extends CI_Controller
         $this->load->view('admin/adminHome', $data);
     }
 
-    public function viewAgent($admin_id)
+    public function viewAgent($agentID)
     {
         $this->load->model('AgentModel');
+        $this->load->model('OrderModel');
+        $this->load->model('CountModel');
+
+        // Get admin data
+        $agentdata = $this->AgentModel->agentData($agentID)[0];
+//        if(!$admindata->active)
+//        {
+//            $_SESSION['error'] = "Sorry, This admin is currently inactive";
+//            redirect();
+//        }
+
+        // Get order data
+//        $orderdata = $this->OrderModel->getOrderDetailsAdmin($admin_id);
+//
+//        //get Order data group by agent
+        $grouporderdata = $this->OrderModel->getOrderDetailsRequiredToAdmin($agentID);
+//
+//        // Get confirmed order count
+//        $orderconfirmedcount = $this->OrderModel->getConfirmedOrderCount($admin_id)[0];
+//
+//        // Get confirmed order count
+//        $orderpendingcount = $this->OrderModel->getPendingOrderCount($admin_id)[0];
+//
+//        //get agent count
+//        $agentcount = $this->CountModel->getAgentCount($admin_id)[0];
+//
+//        //get rep count
+//        $repcount = $this->CountModel->getRepCount($admin_id)[0];
+//
+//        //get shop count
+//        $shopcount = $this->CountModel->getShopCount($admin_id)[0];
+//
+//        //get sent inquiry count
+//        $sentinquirycount = $this->CountModel->getSentInquiryCount($admin_id)[0];
+//
+//        //get received inquiry count
+//        $receivedinquirycount = $this->CountModel->getreceivedInquiryCount($admin_id)[0];
+//
+//        //hierarchicalData
+//        //$alldata = $this->AdminModel->getTableDataInHeirarchicalOrder();
+//
+//        $data = array(  'admindata' => $admindata,'grouporderdata'=>$grouporderdata, 'orderdata'=>$orderdata,'agentcount'=>$agentcount,'repcount'=>$repcount,'shopcount'=>$shopcount,'orderconfirmedcount'=>$orderconfirmedcount,'orderpendingcount'=>$orderpendingcount,'sentinquirycount'=>$sentinquirycount,'receivedinquirycount'=>$receivedinquirycount ); //,'inquirydata'=>$inquirydata
+
+        $data = array('agentdata'=>$agentdata,'grouporderdata'=>$grouporderdata);
+
+        $this->load->view('agent/agentHome', $data);
     }
 
     public function logout()

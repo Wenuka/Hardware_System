@@ -82,7 +82,7 @@
                      style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
                     <div class="box-header with-border" style="text-align: center;">
                         <h3 class="box-title"
-                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Inquiries</h3>
+                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Sent Inquiries</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body" style="padding:0 4%;">
@@ -91,10 +91,10 @@
                                cellspacing="0" width="100%">
                             <thead class="no-border">
                             <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                                <th data-priority="1" style="max-width:50px;">Order ID</th>
-                                <th data-priority="1" style="max-width:50px;">Agent ID</th>
-                                <th data-priority="1" style="max-width:50px;">Agent Name</th>
-                                <th data-priority="1" style="max-width:50px;">Filter ID</th>
+                                <th data-priority="1" style="max-width:50px;">Inquiry ID</th>
+                                <th data-priority="1" style="max-width:50px;">Inquiry Type</th>
+                                <th data-priority="1" style="max-width:50px;">Receiver Code</th>
+                                <th data-priority="1" style="max-width:50px;">Receiver Name</th>
                                 <th data-priority="4">Message</th>
                                 <th data-priority="5">Date</th>
                                 <th data-priority="2" style="max-width:90px;">Status</th>
@@ -102,26 +102,87 @@
                             </thead>
                             <tbody id="orderTable" style="text-align: center;">
                             <?php
-                            if (sizeof($inquirydata) > 0) {
-                                for ($i = 0; $i < sizeof($inquirydata); $i++) {
+                            if (sizeof($sentinquirydata) > 0) {
+                                for ($i = 0; $i < sizeof($sentinquirydata); $i++) {
                                     ?>
-                                    <tr style="text-align:left;" id="<?php echo $inquirydata[$i]->inquiry_id; ?>">
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->inquiry_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->agent_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->name; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo ($inquirydata[$i]->filter_id == 0)?"By Admin":$inquirydata[$i]->filter_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->message; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->last_edittime; ?></td>
-                                        <?php if ($inquirydata[$i]->status == "confirm") {
-                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#daefdc;'>".$inquirydata[$i]->status."</td>";
+                                    <tr style="text-align:left;" id="<?php echo $sentinquirydata[$i]->inquiryID;  ?>">
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->inquiryID; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->inquiryType; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->agentCode; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->agentName; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->message; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->lastEditedTime; ?></td>
+                                        <?php if ($sentinquirydata[$i]->inquiryStatus == "not seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#daefdc;'>".$sentinquirydata[$i]->inquiryStatus."</td>";
                                         }
-                                        elseif ($inquirydata[$i]->status == "ignored") {
-                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#d8a9a5;'>".$inquirydata[$i]->status."</td>";
+                                        elseif ($sentinquirydata[$i]->inquiryStatus == "seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#d8a9a5;'>".$sentinquirydata[$i]->inquiryStatus."</td>";
                                         }
-                                        else{
-                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#FCF3CF;'>".$inquirydata[$i]->status."</td>";
+                                        else {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#FCF3CF;'>".$sentinquirydata[$i]->inquiryStatus."</td>";
                                         } ?>
                                         
+                                    </tr>
+                                <?php }
+                            } ?>
+                            </tbody>
+                        </table>
+                        <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- Small boxes (Stat box) -->
+            <!-- <br> -->
+        </section>
+        <section class="content" style="padding-right:5%;padding-left:5%;">
+            <div class ="col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+
+                <div id="about_web" class="box box-solid"
+                     style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
+                    <div class="box-header with-border" style="text-align: center;">
+                        <h3 class="box-title"
+                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Received Inquiries</h3>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="padding:0 4%;">
+                        <br>
+                        <table id="inquirytable" class="table table-striped nowrap table-responsive"
+                               cellspacing="0" width="100%">
+                            <thead class="no-border">
+                            <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
+                                <th data-priority="1" style="max-width:50px;">Inquiry ID</th>
+                                <th data-priority="1" style="max-width:50px;">Inquiry Type</th>
+                                <th data-priority="1" style="max-width:50px;">Sender Code</th>
+                                <th data-priority="1" style="max-width:50px;">Sender Name</th>
+                                <th data-priority="4">Message</th>
+                                <th data-priority="5">Date</th>
+                                <th data-priority="2" style="max-width:90px;">Status</th>
+                            </tr>
+                            </thead>
+                            <tbody id="orderTable" style="text-align: center;">
+                            <?php
+                            if (sizeof($receivedinquirydata) > 0) {
+                                for ($i = 0; $i < sizeof($receivedinquirydata); $i++) {
+                                    ?>
+                                    <tr style="text-align:left;" id="<?php echo $receivedinquirydata[$i]->inquiryID;  ?>">
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->inquiryID; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->inquiryType; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->agentCode; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->agentName; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->message; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->lastEditedTime; ?></td>
+                                        <?php if ($receivedinquirydata[$i]->inquiryStatus == "not seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#daefdc;'>".$receivedinquirydata[$i]->inquiryStatus."</td>";
+                                        }
+                                        elseif ($receivedinquirydata[$i]->inquiryStatus == "seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#d8a9a5;'>".$receivedinquirydata[$i]->inquiryStatus."</td>";
+                                        }
+                                        else {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#FCF3CF;'>".$receivedinquirydata[$i]->inquiryStatus."</td>";
+                                        } ?>
+
                                     </tr>
                                 <?php }
                             } ?>

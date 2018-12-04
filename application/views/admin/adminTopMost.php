@@ -78,8 +78,8 @@
                         <img src='../../assets/images/admin/avatar.png'  style='border-radius: 40%;' class="img-circle" alt="User Image">
 
                         <p>
-                            <?php echo (isset($admindata))?$admindata->name:'';?>
-                            <small>Admin ID #<?php echo (isset($admindata))?$admindata->admin_id:'';?></small>
+                            <?php echo (isset($admindata))?$admindata->adminName:'';?>
+                            <small>Admin ID #<?php echo (isset($admindata))?$admindata->adminID:'';?></small>
                         </p>
                     </li>
                     <!-- Menu Body -->

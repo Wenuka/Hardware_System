@@ -72,6 +72,16 @@
     </script>
 
     <style>
+        .modalLbl {
+            font-weight: bolder;
+            color: dimgrey;
+            font-size: small;
+        }
+
+        .modalTxt {
+            color: dimgrey;
+            font-size: small;
+        }
         /*jssor slider loading skin spin css*/
         .jssorl-009-spin img {
             animation-name: jssorl-009-spin;
@@ -136,7 +146,7 @@
                             </div>
                             <div class="box-body" style="padding:4%;">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <img src='<?php echo $rep->repImagePath?>'  style='border-radius: 40%;width: 100%' height="140px" width="140px" class="img-circle" alt="User Image">
+                                    <img src='<?php echo $rep->repImagePath!=""?$rep->repImagePath:"../../assets/images/admin/avatar.png" ?>'  style='border-radius: 40%;width: 100%' height="140px" width="140px" class="img-circle" alt="User Image">
                                     <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
                                     <h4 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$rep->repName<br>"; ?></h4>
@@ -160,7 +170,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Agent Details</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Rep Details</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -171,7 +181,7 @@
                             <div class="col-lg-4 col-md-4">
                                 <img src="../../assets/images/admin/avatar.png" id="repImage"
                                      style='border-radius: 100%;max-height:140px;max-width:140px;' class="img-circle"
-                                     alt="Agent Image">
+                                     alt="Rep Image">
                             </div>
                             <div class="col-lg-8 col-md-8">
                                 <div class="col-lg-6 col-md-6 modalLbl">
@@ -246,43 +256,33 @@
             $('#repCode').append('<p>' + repCode + '</p>');
 
             var repImage = $(variable).data('todo').imagePath;
-            if (agentImage != "") {
-                $('#agentImage').attr("src", agentImage);
-            }
-
-            var equipImage = $(variable).data('todo').photo;
-            if (equipImage != "") {
-                $('#equipImage').attr("src", equipImage);
-            }
-
-            var repImage = $(variable).data('todo').repImagePath;
             if (repImage != "") {
                 $('#repImage').attr("src", repImage);
             }
 
-            var agentName = $(variable).data('todo').agentName;
-            $('#agentName').empty();
-            $('#agentName').append('<p>' + agentName + '</p>');
+            var repName = $(variable).data('todo').repName;
+            $('#repName').empty();
+            $('#repName').append('<p>' + repName + '</p>');
+
+            var agentID = $(variable).data('todo').agentID;
+            $('#agentID').empty();
+            $('#agentID').append('<p>' + agentID + '</p>');
 
             var address = $(variable).data('todo').address;
             $('#agentAddress').empty();
             $('#agentAddress').append('<p>' + address + '</p>');
-
-            var agentContact = $(variable).data('todo').contact;
-            $('#agentContact').empty();
-            $('#agentContact').append('<p>' + agentContact + '</p>');
-
+            //
+            var contact = $(variable).data('todo').contact;
+            $('#contact').empty();
+            $('#contact').append('<p>' + contact + '</p>');
+            //
             var email = $(variable).data('todo').email;
             $('#email').empty();
             $('#email').append('<p>' + email + '</p>');
-
-            var town = $(variable).data('todo').town;
-            $('#town').empty();
-            $('#town').append('<p>' + town + '</p>');
-
-            var province = $(variable).data('todo').province;
-            $('#province').empty();
-            $('#province').append('<p>' + province + '</p>');
+            //
+            var nic = $(variable).data('todo').nic;
+            $('#nic').empty();
+            $('#nic').append('<p>' + nic + '</p>');
 
             var status = $(variable).data('todo').status;
             $('#status').empty();
