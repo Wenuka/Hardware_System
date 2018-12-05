@@ -169,7 +169,7 @@
                                 document.getElementById("uploadBtn").addEventListener('click', function(e){
                                   e.preventDefault();
                                   var imgCount = 0;
-                                  var id = <?php echo $admindata->admin_id; ?>;
+                                  var id = <?php echo $admindata->adminID; ?>;
                                   var type = 'admin';
                                   var files = document.getElementById("imgUploadId").files[0];
                                   //for (var i in files) {

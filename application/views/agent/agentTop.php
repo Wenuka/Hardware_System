@@ -56,7 +56,7 @@
               <h3 id="notifications"></h3>
 
                 <p style="margin:0;">Agent Name:</p>
-               <p style="font-size:1.4em;margin:4px;"><?php echo $agentdata->name; ?> </p>
+               <p style="font-size:1.4em;margin:4px;"><?php echo $agentdata->agentName; ?> </p>
 
             </div>
             <div class="icon">

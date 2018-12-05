@@ -113,11 +113,11 @@ class AdminModel extends CI_Model
         return $this->db->insert_id();
     }
 
-//    function editAdminPersonalDetails($results, $admin_id)
-//    {
-//        $this->db->where('admin_id', $admin_id);
-//        $this->db->update("admin", $results);
-//    }
+   function editAdminPersonalDetails($results, $admin_id)
+   {
+       $this->db->where('adminID', $admin_id);
+       $this->db->update("admin", $results);
+   }
 //	function customerId($filter_id){
 //        $this->db->where('filter_id', $filter_id);
 //        $this->db->select('customer_id');

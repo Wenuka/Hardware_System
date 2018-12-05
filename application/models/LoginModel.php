@@ -37,7 +37,7 @@ class LoginModel extends CI_Model
 		}
 	}
 	function agentData($agent_id){
-		$this->db->where('agent_id', $agent_id);
+		$this->db->where('agentID', $agent_id);
 		$this->db-> from('agent');
 		$query1 = $this->db->get();
 		if ($query1-> num_rows() > 0){
@@ -47,9 +47,9 @@ class LoginModel extends CI_Model
 			return NULL;	
 		}
 	}
-	function agentLoginData($agent_id){
-		$this->db->where('usertype', 'agent');
-		$this->db->where('id', $agent_id);
+	function loginData($agent_id, $usertype){
+		$this->db->where('usertype', $usertype);
+		$this->db->where('userID', $agent_id);
 		$this->db-> from('login');
 		$query1 = $this->db->get();
 		if ($query1-> num_rows() > 0){
@@ -149,7 +149,7 @@ class LoginModel extends CI_Model
 		}
 	}
 	function editAccountDetails($results,$login_id){
-		$this->db->where('login_id', $login_id);  
+		$this->db->where('userID', $login_id);  
 		$this->db->update("login", $results);  
 	}
 	function addLogin($results){
@@ -159,7 +159,7 @@ class LoginModel extends CI_Model
 		$this->db->insert('inquiry', $results);
 	}
 	function addUserPhoto($path, $id , $type){
-		$this->db->where($type.'_id', $id);  
+		$this->db->where($type.'ID', $id);  
 		$this->db->update($type, $path);  
 	}
 	// function LoginPics($dir, $owner_id){

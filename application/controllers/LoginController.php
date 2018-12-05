@@ -91,6 +91,7 @@ class LoginController extends CI_Controller
     {
         $this->load->library('session');
         $this->load->library('Constants');
+        // print_r($_SESSION);
         if (isset($_SESSION['usertype']))
         {
             if ($_SESSION['usertype'] == Constants::$admin && isset($_SESSION['admin_no']))

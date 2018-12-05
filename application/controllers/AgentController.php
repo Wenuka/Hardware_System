@@ -3,12 +3,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AgentController extends CI_Controller
 {
+    public static $admin = "Ad";
+    public static $agent = "Ag";
+    public static $rep = "Rp";
+    public static $shop = "Sh";
 
+    public static $adminTbl = "admin";
+    public static $agentTbl = "agent";
+    public static $repTbl = "rep";
+    public static $shopTbl = "shop";
     public function viewFilter()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $filterdata = $this->LoginModel->agentFilterData($agent_id);
@@ -39,9 +48,10 @@ class AgentController extends CI_Controller
 
     public function viewCustomer()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $agentdata = $this->LoginModel->agentData($agent_id)[0];
@@ -61,14 +71,15 @@ class AgentController extends CI_Controller
 
     public function viewAgent()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $agentdata = $this->LoginModel->agentData($agent_id)[0];
-                $logindata = $this->LoginModel->agentLoginData($agent_id)[0];
-                $_SESSION['login_id'] = $logindata->login_id;
+                $logindata = $this->LoginModel->loginData($agent_id,Constants::$agent)[0];
+                $_SESSION['login_id'] = $logindata->userID;
                 $data = array('agentdata' => $agentdata, 'logindata' => $logindata);
                 $this->load->view('agent/agentDetails', $data);
             } else {
@@ -83,9 +94,10 @@ class AgentController extends CI_Controller
 
     public function viewContact()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $agentdata = $this->LoginModel->agentData($agent_id)[0];
@@ -103,9 +115,10 @@ class AgentController extends CI_Controller
 
     public function viewInquiries()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $this->load->model('AgentModel');
@@ -144,21 +157,23 @@ class AgentController extends CI_Controller
 
     public function editMyAccount()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['login_id']) && isset($_SESSION['agent_no'])) {
-            if ($_SESSION['usertype'] == "agent") {
+            if ($_SESSION['usertype'] == Constants::$agent) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $data1 = array();
                 $data2 = array();
 
                 $this->load->model('AgentModel');
+                $this->load->model('LoginModel');
 
                 if (isset($_POST['fullname'])) {
                     $data1 = array(
-                        'name' => $_POST['fullname'],
+                        'agentName' => $_POST['fullname'],
                         'email' => $_POST['email'],
-                        'mobile' => $_POST['tele']
+                        'contact' => $_POST['tele']
                     );
                     $data2 = array(
                         //'username'=> $_POST['username'],
@@ -168,7 +183,7 @@ class AgentController extends CI_Controller
                     $login_id = $_SESSION['login_id'];
                     $agent_id = $_SESSION['agent_no'];
                     // $this->AccountModel->logPersonalDetails($owner_id);
-                    $this->AgentModel->editAccountDetails($data2, $login_id);
+                    $this->LoginModel->editAccountDetails($data2, $login_id);
                     $this->AgentModel->editAgentPersonalDetails($data1, $agent_id);
                 }
                 $this->viewAgent();
@@ -185,12 +200,13 @@ class AgentController extends CI_Controller
 
     public function addNewCustomer()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         // print_r($_SESSION);
         // echo "<br><br>";
         // print_r($_POST);
         if (isset($_SESSION['usertype']) && isset($_SESSION['agent_no'])) {
-            if ($_SESSION['usertype'] == "agent") {
+            if ($_SESSION['usertype'] == Constants::$agent) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 // $data1=array();
@@ -271,9 +287,10 @@ class AgentController extends CI_Controller
 
     public function addNewWork()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['agent_no'])) {
-            if ($_SESSION['usertype'] == "agent") {
+            if ($_SESSION['usertype'] == Constants::$agent) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $data1 = array();
@@ -341,9 +358,10 @@ class AgentController extends CI_Controller
 
     public function addNewWorkEnd()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['agent_no'])) {
-            if ($_SESSION['usertype'] == "agent") {
+            if ($_SESSION['usertype'] == Constants::$agent) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $agent_id = $_SESSION['agent_no'];
@@ -388,9 +406,10 @@ class AgentController extends CI_Controller
 
     public function newWork()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $this->load->model('AgentModel');
@@ -411,9 +430,10 @@ class AgentController extends CI_Controller
     }
     public function showPhotos()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 $agent_id = $_SESSION['agent_no'];
                 $this->load->model('LoginModel');
                 $this->load->model('AgentModel');
@@ -474,9 +494,10 @@ class AgentController extends CI_Controller
     }
     public function showFilterPhotos()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == "agent" && isset($_SESSION['agent_no'])) {
+            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
                 if (isset($_POST['submit'])) {
                     $this->showFilterPhotosFunction($this->input->post('submit'));
                 }

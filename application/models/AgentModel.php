@@ -121,11 +121,11 @@ class AgentModel extends CI_Model
 //        $this->db->update("inquiries", $data);
 //    }
 //
-//    function editAgentPersonalDetails($results, $agent_id)
-//    {
-//        $this->db->where('agent_id', $agent_id);
-//        $this->db->update("agent", $results);
-//    }
+   function editAgentPersonalDetails($results, $agent_id)
+   {
+       $this->db->where('agentID', $agent_id);
+       $this->db->update("agent", $results);
+   }
 //
 //    function editAccountDetails($results, $login_id)
 //    {

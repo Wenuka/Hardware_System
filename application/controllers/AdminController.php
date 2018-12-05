@@ -3,7 +3,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AdminController extends CI_Controller
 {
+    public static $admin = "Ad";
+    public static $agent = "Ag";
+    public static $rep = "Rp";
+    public static $shop = "Sh";
 
+    public static $adminTbl = "admin";
+    public static $agentTbl = "agent";
+    public static $repTbl = "rep";
+    public static $shopTbl = "shop";
     public function getSessionAdminID()
     {
         $this->load->model('SessionModel');
@@ -148,9 +156,10 @@ class AdminController extends CI_Controller
 
     public function viewContact()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
+            if (($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
                 $admin_id = $_SESSION['admin_no'];
                 $this->load->model('LoginModel');
                 $admindata = $this->LoginModel->adminData($admin_id)[0];
@@ -194,9 +203,10 @@ class AdminController extends CI_Controller
 
     public function editMyAccount()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['login_id']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin") {
+            if ($_SESSION['usertype'] == Constants::$admin) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $data1 = array();
@@ -207,9 +217,9 @@ class AdminController extends CI_Controller
 
                 if (isset($_POST['fullname'])) {
                     $data1 = array(
-                        'name' => $_POST['fullname'],
+                        'adminName' => $_POST['fullname'],
                         'email' => $_POST['email'],
-                        'mobile' => $_POST['tele']
+                        'contact' => $_POST['tele']
                     );
                     $data2 = array(
                         //'username'=> $_POST['username'],
@@ -268,9 +278,10 @@ class AdminController extends CI_Controller
     }
     public function addPart()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -296,9 +307,10 @@ class AdminController extends CI_Controller
     }
     public function addCode()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -325,9 +337,10 @@ class AdminController extends CI_Controller
 
     public function addNewAgent()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "Ad") {
+            if ($_SESSION['usertype'] == Constants::$admin) {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -370,9 +383,10 @@ class AdminController extends CI_Controller
 
     public function deleteWork()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -416,9 +430,10 @@ class AdminController extends CI_Controller
     }
     public function deleteFilter()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -439,9 +454,10 @@ class AdminController extends CI_Controller
     }
     public function deleteAgent()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype']) && isset($_SESSION['admin_no'])) {
-            if ($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") {
+            if ($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") {
                 $this->load->helper('form');
                 $this->load->helper('url');
                 $admin_id = $_SESSION['admin_no'];
@@ -509,9 +525,10 @@ class AdminController extends CI_Controller
 
     public function showPhotos()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
+            if (($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
                 $admin_id = $_SESSION['admin_no'];
                 $this->load->model('AgentModel');
                 $this->load->model('AdminModel');
@@ -573,9 +590,10 @@ class AdminController extends CI_Controller
     }
     public function showFilterPhotos()
     {
+        $this->load->library('Constants');
         $this->load->library('session');
         if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == "admin" || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
+            if (($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
                 if (isset($_POST['submit'])) {
                     $this->showFilterPhotosFunction($this->input->post('submit'));
                 }

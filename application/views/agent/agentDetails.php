@@ -120,8 +120,8 @@
 
                                   <div class="text-center">
                                     <?php 
-                                    if ($agentdata->image_path != null){
-                                      echo '<img src="../../'.$agentdata->image_path.'" width=200 height=200 class="avatar img-circle" alt="avatar">';
+                                    if ($agentdata->imagePath != null){
+                                      echo '<img src="../../'.$agentdata->imagePath.'" width=200 height=200 class="avatar img-circle" alt="avatar">';
                                     }
                                     else {echo '<img src="../../assets/images/agent/avatar.png" width=200 height=200 class="avatar img-circle" alt="avatar">';}  ?>
 
@@ -169,7 +169,7 @@
                                 document.getElementById("uploadBtn").addEventListener('click', function(e){
                                   e.preventDefault();
                                   var imgCount = 0;
-                                  var id = <?php echo $agentdata->agent_id; ?>;
+                                  var id = <?php echo $agentdata->agentID; ?>;
                                   var type = 'agent';
                                   var files = document.getElementById("imgUploadId").files[0];
                                   //for (var i in files) {
@@ -200,7 +200,22 @@
 
                                     <div class="form-group">
                                       <label for="fullname">Full Name</label>
-                                      <input type="text" class="form-control is-disabled" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo $agentdata->name; ?>" disabled required>
+                                      <input type="text" class="form-control is-disabled" id="fullname" name="fullname" placeholder="Full Name" value="<?php echo $agentdata->agentName; ?>" disabled required>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="AdressInput">Address</label>
+                                      <input type="address" class="form-control is-disabled" id="address" name="address" placeholder="Address" value="<?php echo $agentdata->address; ?>"  data-error="Bruh, that email address is invalid" disabled required>
+                                      <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="townInput">Town</label>
+                                      <input type="town" class="form-control is-disabled" id="town" name="town" placeholder="Town" value="<?php echo $agentdata->town; ?>"  data-error="Bruh, that town is invalid" disabled required>
+                                      <div class="help-block with-errors"></div>
+                                    </div>
+                                    <div class="form-group">
+                                      <label for="provinceInput">Province</label>
+                                      <input type="province" class="form-control is-disabled" id="province" name="province" placeholder="Province" value="<?php echo $agentdata->province; ?>"  data-error="Bruh, that province is invalid" disabled required>
+                                      <div class="help-block with-errors"></div>
                                     </div>
                                     <div class="form-group">
                                       <label for="exampleInputEmail1">Email address</label>
@@ -209,14 +224,14 @@
                                     </div>
                                     <div class="form-group">
                                       <label for="tel">Mobile</label>
-                                      <input type="tel" class="form-control is-disabled" id="tele" name="tele" value="<?php echo $agentdata->mobile; ?>" data-maxlength="10" data-minlength="9" pattern="[0-9]{10}" disabled required>
+                                      <input type="tel" class="form-control is-disabled" id="tele" name="tele" value="<?php echo $agentdata->contact; ?>" data-maxlength="10" data-minlength="9" pattern="[0-9]{10}" disabled required>
                                       <div class="help">Format of the telephone number should be [0711234567] (length - 10 numbers.)</div>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                       <label for="dob">Date of Birth</label>
                                       <input type="dob" class="form-control is-disabled" id="dob" name="dob" placeholder="Date of Birth" value="<?php echo $agentdata->date_of_birth; ?>"  disabled>
                                       <div class="help-block with-errors"></div>
-                                    </div>
+                                    </div> -->
                                     <h4 style="text-align:left;color:dimgrey;padding-bottom:6px;border-bottom:1px solid #f4f4f4;">Accounts Info</h4>
                                     <div class="form-group">
                                       <label for="username">Username</label>
@@ -308,7 +323,9 @@
       var isReadonly  = $form.hasClass('is-readonly');
       $form.find('input,textarea').prop('disabled', isReadonly);
       document.getElementById("username").disabled = true;
-      document.getElementById("dob").disabled = true;
+      document.getElementById("address").disabled = true;
+      document.getElementById("town").disabled = true;
+      document.getElementById("province").disabled = true;
       document.getElementById("save_btn").disabled = false;
       document.getElementById("edit_btn").disabled = true;
     });

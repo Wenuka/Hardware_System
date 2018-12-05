@@ -166,8 +166,7 @@ class EditImagesController extends CI_Controller
             $name =$_POST["type"].'_'.$_POST["id"].'_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png';
             $dir = $_POST["type"];
             $this->uploadSolo($dir,$name);
-            // $data = array($_POST["type"].'_id'=> $_POST["id"] ,'image_path'=> 'assets/images/'.$dir.'/'.$name);
-            $this->LoginModel->addUserPhoto(array('image_path'=> 'assets/images/'.$dir.'/'.$name), $_POST["id"], $_POST["type"]);    
+            $this->LoginModel->addUserPhoto(array('imagePath'=> 'assets/images/'.$dir.'/'.$name), $_POST["id"], $_POST["type"]);    
         }
     }
     public function photoUploadMainMultiple(){
@@ -178,7 +177,7 @@ class EditImagesController extends CI_Controller
                     $name ='work_'.$_POST["work_id"].'_'.$_POST["id"].'_' . date('Y-m-d-H-i-s') . '_' . uniqid() . '.png'; 
                     $dir = 'workproof/filter_'.$_POST["f_id"];  
                     $this->uploadSolo($dir,$name);
-                    $data = array('work_id'=> $_POST["work_id"] ,'image_path'=> 'assets/images/'.$dir.'/'.$name);
+                    $data = array('work_id'=> $_POST["work_id"] ,'imagePath'=> 'assets/images/'.$dir.'/'.$name);
                     $this->AgentModel->addWorkProof($data);    
                 }
             }

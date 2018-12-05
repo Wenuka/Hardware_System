@@ -6,10 +6,10 @@
     <!-- Sidebar user panel -->
     <div class="user-panel" style="margin-bottom:5%;height:auto;text-align:center">
       <div class= "image" style="margin-bottom:5%;text-align:center;margin-top:10%;">
-        <img src="<?php echo (isset($agentdata))?'../../'.$agentdata->image_path:'../../assets/images/agent/avatar.png';?>"  style='border-radius: 100%;max-height:105px;max-width:105px;' class="img-circle" alt="Agent Image">
+        <img src="<?php echo (isset($agentdata))?'../../'.$agentdata->imagePath:'../../assets/images/agent/avatar.png';?>"  style='border-radius: 100%;max-height:105px;max-width:105px;' class="img-circle" alt="Agent Image">
       </div>
       <div class="info" style="left:0;position:relative;padding:0;">
-        <p style="display:inline-block;"><?php  echo (isset($agentdata))?$agentdata->name:'Welcome!';?></p>
+        <p style="display:inline-block;"><?php  echo (isset($agentdata))?$agentdata->agentName:'Welcome!';?></p>
       </div>
     </div>
       <ul class="sidebar-menu">

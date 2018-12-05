@@ -75,11 +75,11 @@
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header" style="text-align: center;background-color: #222d32;">
-                        <img src="<?php echo (isset($agentdata))?'../../'.$agentdata->image_path:'../../assets/images/agent/avatar.png';?>"  style='border-radius: 40%;' class="img-circle" alt="User Image">
+                        <img src="<?php echo (isset($agentdata))?'../../'.$agentdata->imagePath:'../../assets/images/agent/avatar.png';?>"  style='border-radius: 40%;' class="img-circle" alt="User Image">
 
                         <p>
-                            <?php echo (isset($agentdata))?$agentdata->name:'';?>
-                            <small>Agent ID #<?php echo (isset($agentdata))?$agentdata->agent_id:'';?></small>
+                            <?php echo (isset($agentdata))?$agentdata->agentName:'';?>
+                            <small>Agent ID #<?php echo (isset($agentdata))?$agentdata->agentID:'';?></small>
                         </p>
                     </li>
                     <!-- Menu Body -->
