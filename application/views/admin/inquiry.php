@@ -91,10 +91,10 @@
                                cellspacing="0" width="100%">
                             <thead class="no-border">
                             <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                                <th data-priority="1" style="max-width:50px;">Inquiry ID</th>
-                                <th data-priority="1" style="max-width:50px;">Inquiry Type</th>
-                                <th data-priority="1" style="max-width:50px;">Receiver Code</th>
-                                <th data-priority="1" style="max-width:50px;">Receiver Name</th>
+                                <th data-priority="1">Inquiry ID</th>
+                                <th data-priority="1">Inquiry Type</th>
+                                <th data-priority="1">Receiver Code</th>
+                                <th data-priority="1">Receiver Name</th>
                                 <th data-priority="4">Message</th>
                                 <th data-priority="5">Date</th>
                                 <th data-priority="2" style="max-width:90px;">Status</th>

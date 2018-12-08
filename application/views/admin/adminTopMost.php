@@ -75,7 +75,13 @@
                 <ul class="dropdown-menu">
                     <!-- User image -->
                     <li class="user-header" style="text-align: center;background-color: #222d32;">
-                        <img src='../../assets/images/admin/avatar.png'  style='border-radius: 40%;' class="img-circle" alt="User Image">
+                        <?php if(isset($admindata->imagePath)){
+                            $image = '../../'.$admindata->imagePath;
+                        }
+                        else{
+                            $image = '../../assets/images/agent/avatar.png';
+                        }?>
+                        <img src="<?php echo $image?>"  style='border-radius: 40%;' class="img-circle" alt="User Image">
 
                         <p>
                             <?php echo (isset($admindata))?$admindata->adminName:'';?>

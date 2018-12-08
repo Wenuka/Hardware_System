@@ -159,10 +159,12 @@ class LoginController extends CI_Controller
         $shopcount = $this->CountModel->getShopCount($admin_id)[0];
 
         //get sent inquiry count
-        $sentinquirycount = $this->CountModel->getSentInquiryCount($admin_id)[0];
+        $sentType = 'Adag';
+        $sentinquirycount = $this->CountModel->getSentInquiryCount($admin_id,$sentType)[0];
 
         //get received inquiry count
-        $receivedinquirycount = $this->CountModel->getreceivedInquiryCount($admin_id)[0];
+        $receiveType = 'Agad';
+        $receivedinquirycount = $this->CountModel->getreceivedInquiryCount($admin_id, $receiveType)[0];
 
         //hierarchicalData
         //$alldata = $this->AdminModel->getTableDataInHeirarchicalOrder();
@@ -182,45 +184,39 @@ class LoginController extends CI_Controller
         $agentdata = $this->AgentModel->agentData($agentID)[0];
 
         $repdata = $this->AgentModel->getRepData($agentID);
-//        if(!$admindata->active)
-//        {
-//            $_SESSION['error'] = "Sorry, This admin is currently inactive";
-//            redirect();
-//        }
 
         // Get order data
-//        $orderdata = $this->OrderModel->getOrderDetailsAdmin($admin_id);
+        $orderdata = $this->OrderModel->getOrderDetailsAgent($agentID);
 //
 //        //get Order data group by agent
         $grouporderdata = $this->OrderModel->getOrderDetailsRequiredToAdmin($agentID);
-//
-//        // Get confirmed order count
-//        $orderconfirmedcount = $this->OrderModel->getConfirmedOrderCount($admin_id)[0];
-//
-//        // Get confirmed order count
-//        $orderpendingcount = $this->OrderModel->getPendingOrderCount($admin_id)[0];
-//
-//        //get agent count
-//        $agentcount = $this->CountModel->getAgentCount($admin_id)[0];
-//
-//        //get rep count
-//        $repcount = $this->CountModel->getRepCount($admin_id)[0];
-//
-//        //get shop count
-//        $shopcount = $this->CountModel->getShopCount($admin_id)[0];
-//
-//        //get sent inquiry count
-//        $sentinquirycount = $this->CountModel->getSentInquiryCount($admin_id)[0];
-//
-//        //get received inquiry count
-//        $receivedinquirycount = $this->CountModel->getreceivedInquiryCount($admin_id)[0];
+
+        // Get confirmed order count
+        $orderconfirmedcount = $this->OrderModel->getConfirmedOrderCountAgent($agentID)[0];
+
+        // Get confirmed order count
+        $orderpendingcount = $this->OrderModel->getPendingOrderCountAgent($agentID)[0];
+
+
+        $repcount = $this->CountModel->getRepCountAgent($agentID)[0];
+
+        //get shop count
+        $shopcount = $this->CountModel->getShopCountAgent($agentID)[0];
+
+        //get sent inquiry count
+        $sentType = 'AgRp || AgShp';
+        $sentinquirycount = $this->CountModel->getSentInquiryCount($agentID, $sentType)[0];
+
+        //get received inquiry count
+        $receiveType = 'RpAg || ShpAg';
+        $receivedinquirycount = $this->CountModel->getreceivedInquiryCount($agentID, $receiveType)[0];
 //
 //        //hierarchicalData
 //        //$alldata = $this->AdminModel->getTableDataInHeirarchicalOrder();
 //
 //        $data = array(  'admindata' => $admindata,'grouporderdata'=>$grouporderdata, 'orderdata'=>$orderdata,'agentcount'=>$agentcount,'repcount'=>$repcount,'shopcount'=>$shopcount,'orderconfirmedcount'=>$orderconfirmedcount,'orderpendingcount'=>$orderpendingcount,'sentinquirycount'=>$sentinquirycount,'receivedinquirycount'=>$receivedinquirycount ); //,'inquirydata'=>$inquirydata
 
-        $data = array('agentdata'=>$agentdata,'grouporderdata'=>$grouporderdata, 'repdata'=>$repdata);
+        $data = array('agentdata'=>$agentdata,'grouporderdata'=>$grouporderdata, 'repdata'=>$repdata,'orderdata'=>$orderdata,'repcount'=>$repcount,'shopcount'=>$shopcount,'orderconfirmedcount'=>$orderconfirmedcount,'orderpendingcount'=>$orderpendingcount,'sentinquirycount'=>$sentinquirycount,'receivedinquirycount'=>$receivedinquirycount );
 
         $this->load->view('agent/agentHome', $data);
     }

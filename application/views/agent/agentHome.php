@@ -369,27 +369,26 @@
                                         <?php
                                         if (sizeof($grouporderdata) > 0) {
                                             for ($i = 0; $i < sizeof($grouporderdata); $i++) {
-
 //	                                                    ?>
                                                 <tr style="text-align:left;">
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->repCode; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipID . "  -  " . $grouporderdata[$i]->equipCode; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->equipName; ?></td>
                                                     <td style="border-right:1px solid #f4f4f4;"><?php echo $grouporderdata[$i]->orderCount; ?></td>
-                                                    <?php if($grouporderdata[$i]->status == "Order_Placed"){?>
+                                                    <?php if($grouporderdata[$i]->orderStatus == "Order_Placed"){?>
                                                         <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: cornflowerblue;width:20px;">IN_PROGRESS-AD</td>
-                                                    <?php }else if($grouporderdata[$i]->status == "Deliver-Ad"){ ?>
+                                                    <?php }else if($grouporderdata[$i]->orderStatus == "Deliver-Ad"){ ?>
                                                         <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: yellowgreen;width:20px;">DELIVERED-AD</td>
-                                                    <?php }else if($grouporderdata[$i]->status == "Deliver-Ag"){ ?>
+                                                    <?php }else if($grouporderdata[$i]->orderStatus == "Deliver-Ag"){ ?>
                                                         <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: darkgreen;width:20px;">DELIVERED-AG</td>
-                                                    <?php }else if($grouporderdata[$i]->status == "Rejected-Ad"){ ?>
+                                                    <?php }else if($grouporderdata[$i]->orderStatus == "Rejected-Ad"){ ?>
                                                         <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: orangered;width:20px;">REJECTED-AD</td>
-                                                    <?php }else if($grouporderdata[$i]->status == "Rejected-Ag"){ ?>
+                                                    <?php }else if($grouporderdata[$i]->orderStatus == "Rejected-Ag"){ ?>
                                                         <td style="border-right:1px solid #f4f4f4;margin: 5px;background-color: darkred;width:20px;">REJECTED-AG</td>
                                                     <?php } ?>
                                                     <td style="border-right:1px solid #f4f4f4;">
                                                         <button type="button" style="margin-bottom: 3%;" class="btn btn-default"
-                                                                data-toggle="modal" data-status="<?php echo $grouporderdata[$i]->status; ?>" data-todo="<?php echo $grouporderdata[$i]->equipID; ?>" data-id='<?php echo $grouporderdata[$i]->agentID; ?>'
+                                                                data-toggle="modal" data-status="<?php echo $grouporderdata[$i]->orderStatus; ?>" data-todo="<?php echo $grouporderdata[$i]->equipID; ?>" data-id='<?php echo $grouporderdata[$i]->agentID; ?>'
                                                                 data-target="#exampleModalGroupData">More details</button>
                                                     </td>
                                                 </tr>
@@ -406,7 +405,88 @@
             </div>
             <br>
         </section>
+        <section class="content" id="content" style="padding-right:2%;padding-left:2%;">
+            <div class="col-lg-12 col-md-12 col-sm-12" id="content_lg" style="padding: 0;">
+                <div class="col-lg-12 col-md-12 col-sm-12" id="content_10">
+                    <?php //include 'adminTop.php'; ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="about_web" class="box box-solid"
+                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
+                                <div class="box-header with-border" style="text-align: center;">
+                                    <h3 class="box-title"
+                                        style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">
+                                        Recent Orders</h3>
+                                </div>
+                                <div class="box-body" style="padding:0 4%;">
+                                    <br>
+                                    <table id="nonGroupedDetailTable" class="table table-striped nowrap table-responsive"
+                                           cellspacing="0" width="100%">
+                                        <thead class="no-border">
+                                        <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
+                                            <th data-priority="1" style="max-width:100px;">Order ID</th>
+                                            <th data-priority="2">Rep ID</th>
+                                            <th data-priority="2">Equipment ID</th>
+                                            <th data-priority="2">Order Count</th>
+                                            <th data-priority="3">Ordered Date</th>
+                                            <th data-priority="3">Deliver Date</th>
+                                            <th data-priority="1">Status</th>
+                                            <th data-priority="1" style="max-width:90px;">More Details</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="workorderTable" style="text-align: center;font-size:13px;">
+                                        <?php
+                                        if (sizeof($orderdata) > 0) {
+                                            for ($i = 0; $i < sizeof($orderdata); $i++) {
 
+//	                                                    ?>
+                                                <tr style="text-align:left;"
+                                                    id="<?php echo $orderdata[$i]->orderID; ?>">
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->orderID; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->repID; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->equipID . "  -  " . $orderdata[$i]->equipCode; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;width: 4px"><?php echo $orderdata[$i]->orderCount; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->orderTimestamp; ?></td>
+                                                    <td style="border-right:1px solid #f4f4f4;"><?php echo $orderdata[$i]->deliverTimestamp; ?></td>
+                                                    <?php if ($orderdata[$i]->orderStatus == "Order_Placed") { ?>
+                                                        <td>
+                                                            <button type="button"
+                                                                    onclick="changeStatus('<?php echo $orderdata[$i]->orderID; ?>')"
+                                                                    style="background-color: green;color: black;font-weight: bolder;"
+                                                                    class="btn btn-default">PROGRESS-AD
+                                                            </button>
+                                                        </td>
+                                                    <?php } else { ?>
+                                                        <td>
+                                                            <button type="button"
+                                                                    style="background-color: red;color: black;font-weight: bolder;"
+                                                                    disabled="true" class="btn btn-default">DELIVERED-AD
+                                                            </button>
+                                                        </td>
+                                                    <?php }
+                                                    ?>
+                                                    <td style="border-right:1px solid #f4f4f4;width: 10px">
+                                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default"
+                                                                id='<?php echo "modal" . $orderdata[$i]->orderDetailID; ?>'
+                                                                data-id='<?php echo $orderdata[$i]->orderDetailID; ?>'
+                                                                data-toggle="modal"
+                                                                data-todo='<?php echo json_encode($orderdata[$i]) ?>'
+                                                                data-target="#exampleModal">More details</button>
+                                                    </td>
+                                                </tr>
+                                            <?php }
+                                        } ?>
+                                        </tbody>
+                                    </table>
+                                    <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </section>
     </div>
     <?php
     include 'footer.html';
@@ -531,43 +611,6 @@
                         Order Status
                     </div>
                     <div class="col-lg-3 col-md-3" id="orderStatus">
-
-                    </div>
-                </div>
-                <br>
-                <div class="row" style="font-size: 15px;">
-                    <div class="col-lg-12 col-md-12" style="font-size: 16px;">
-                        Agent Details
-                        <hr style="border: 0.5px solid rgba(0, 0, 0, 0.2);margin-top: 0;">
-                    </div>
-                    <div class="col-lg-12 col-md-12">
-                        <img src="../../assets/images/admin/avatar.png" id="agentImage"
-                             style='border-radius: 100%;max-height:40px;max-width:40px;' class="img-circle"
-                             alt="Agent Image">
-                    </div>
-                    <br>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Code
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentCode">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Name
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentName">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Address
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentAddress">
-
-                    </div>
-                    <div class="col-lg-3 col-md-3 modalLbl">
-                        Agent Contact
-                    </div>
-                    <div class="col-lg-3 col-md-3" id="agentContact">
 
                     </div>
                 </div>
@@ -841,7 +884,7 @@
         <div class="modal-content"
              style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Add Agent</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Add Inquiry</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -901,6 +944,8 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
+    </div>
+</div>
         <script>
             $(document).ready(function () {
                 $('#confirmModal').on('show.bs.modal', function (event) {
@@ -918,9 +963,8 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "<?php echo site_url(); ?>/AdminController/viewOrderDetail",
+                        url: "<?php echo site_url(); ?>/AgentController/viewOrderDetail",
                         data: {
-                            'agentID': agentID,
                             'equipID': equipID,
                             'status':status
                         },
@@ -937,23 +981,23 @@
                                 $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;width: 5px;">'+obj[i].orderDetailID+'</td>');
                                 $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;">'+obj[i].orderCount+'</td>');
                                 $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding:5px;"><button type="button" style="margin-bottom: 3%;" class="btn btn-default" id ="modal"'+obj[i].orderDetailID+' data-id="'+obj[i].orderDetailID+'" data-toggle="modal" data-todo="'+obj[i]+'" data-target="#exampleModal">More details</button></td>');
-                                if(obj[i].status == 'Order_Placed')
+                                if(obj[i].orderStatus == 'Order_Placed')
                                 {
                                     $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding:5px;"><button data-toggle="modal" data-id="'+obj[i].orderDetailID+'" type="button" style="background-color: cornflowerblue;color: black;font-weight: bolder;" class="btn btn-default" data-target="#confirmModal">Progress-AD</button></td>');
                                 }
-                                else if(obj[i].status == 'Deliver-Ad')
+                                else if(obj[i].orderStatus == 'Deliver-Ad')
                                 {
                                     $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button type="button" style="background-color: greenyellow;color: black;font-weight: bolder;" class="btn btn-default">Delivered-AD</button></td>');
                                 }
-                                else if(obj[i].status == 'Deliver-Ag')
+                                else if(obj[i].orderStatus == 'Deliver-Ag')
                                 {
                                     $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button  type="button" style="background-color: darkgreen;color: black;font-weight: bolder;" class="btn btn-default">Delivered-AG</button></td>');
                                 }
-                                else if(obj[i].status == 'Rejected-Ad')
+                                else if(obj[i].orderStatus == 'Rejected-Ad')
                                 {
                                     $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button type="button" style="background-color: orangered;color: black;font-weight: bolder;" class="btn btn-default">REJECTED-AD</button></td>');
                                 }
-                                else if(obj[i].status == 'Rejected-Ag')
+                                else if(obj[i].orderStatus == 'Rejected-Ag')
                                 {
                                     $('#modalTableBody').append('<td style="border-right:1px solid #f4f4f4;padding: 5px;"><button type="button" style="background-color: darkred;color: black;font-weight: bolder;" class="btn btn-default">REJECTED-AG</button></td>');
                                 }
@@ -971,14 +1015,6 @@
                 $('#exampleModal').on('show.bs.modal', function (event) {
                     var bookId = $(event.relatedTarget).data('id');
                     var variable = "#modal" + bookId;
-                    var agentCode = $(variable).data('todo').agentCode;
-                    $('#agentCode').empty();
-                    $('#agentCode').append('<p>' + agentCode + '</p>');
-
-                    var agentImage = $(variable).data('todo').imagePath;
-                    if (agentImage != "") {
-                        $('#agentImage').attr("src", agentImage);
-                    }
 
                     var equipImage = $(variable).data('todo').photo;
                     if (equipImage != "") {
@@ -989,18 +1025,6 @@
                     if (repImage != "") {
                         $('#repImage').attr("src", repImage);
                     }
-
-                    var agentName = $(variable).data('todo').agentName;
-                    $('#agentName').empty();
-                    $('#agentName').append('<p>' + agentName + '</p>');
-
-                    var address = $(variable).data('todo').address;
-                    $('#agentAddress').empty();
-                    $('#agentAddress').append('<p>' + address + '</p>');
-
-                    var agentContact = $(variable).data('todo').contact;
-                    $('#agentContact').empty();
-                    $('#agentContact').append('<p>' + agentContact + '</p>');
 
                     var repName = $(variable).data('todo').repName;
                     $('#repName').empty();
@@ -1235,5 +1259,6 @@
                 });
             }
         </script>
+
 </body>
 </html>

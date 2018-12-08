@@ -143,25 +143,44 @@ class AgentController extends CI_Controller
     {
         $this->load->library('Constants');
         $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if ($_SESSION['usertype'] == Constants::$agent && isset($_SESSION['agent_no'])) {
-                $agent_id = $_SESSION['agent_no'];
-                $this->load->model('LoginModel');
-                $this->load->model('AgentModel');
-                $agentdata = $this->LoginModel->agentData($agent_id)[0];
-                $inquirydata = $this->AgentModel->allInquiryData($agent_id);
-                $workdata = $this->AgentModel->allWorkData($agent_id);
-                $data = array('agentdata' => $agentdata, 'inquirydata' => $inquirydata, 'workdata' => $workdata);
-                $this->load->view('agent/inquiry', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
+
+        $agentID = $this->getSessionAgentID();
+
+        if ($agentID == null) {
+            $_SESSION['error'] = 'Something is wrong. Please contact your system administrator.';
             redirect();
         }
+
+        $this->load->model('InquiryModel');
+        $this->load->model('AdminModel');
+        $sentInquiryType = "AgAd || AgShp || AgRp";
+        $receivedInquiryType = "AdAg || RpAg || ShpAg ";
+        $sentinquirydata = $this->InquiryModel->getSentInquiriesAdmin($sentInquiryType, $agentID);
+        $receivedinquirydata = $this->InquiryModel->getReceivedInquiriesAdmin($receivedInquiryType, $agentID);
+        $data = array('sentinquirydata' => $sentinquirydata, 'receivedinquirydata' => $receivedinquirydata);
+        $this->load->view('agent/inquiry', $data);
     }
+
+    public function viewOrderDetail(){
+        $this->load->model('OrderModel');
+        $this->load->library('session');
+        $this->load->library('Constants');
+        $equipid = $_POST['equipID'];
+        $status = $_POST['status'];
+
+        $agentID = $this->getSessionAgentID();
+
+        if ($agentID == null) {
+            $_SESSION['error'] = 'Something is wrong. Please contact your system administrator.';
+            redirect();
+        }
+
+        $grouporderdata = $this->OrderModel->retreiveOrderDetailsAgent($agentID,$equipid,$status);
+        echo json_encode($grouporderdata);
+
+        //get Order data group by agent
+    }
+
 
     public function editMyAccount()
     {

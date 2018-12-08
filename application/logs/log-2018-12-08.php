@@ -66,3 +66,20 @@ ERROR - 2018-12-08 12:36:43 --> Severity: Notice --> Undefined variable: usernam
 ERROR - 2018-12-08 12:36:43 --> Severity: Notice --> Undefined variable: password D:\wamp\www\Hardware_System\application\controllers\AgentController.php 108
 ERROR - 2018-12-08 12:39:12 --> Query error: Duplicate entry 'SH001' for key 'shopCode' - Invalid query: INSERT INTO `shop` (`shopCode`, `email`, `ownerName`, `shopName`, `tele`, `mobile`, `creditLimit`, `repID`, `riskScore`, `size`) VALUES ('SH001', 'pnilupulee@yahoo.com', 'Yasara Peiris', 'Chicoree', '0779047316', '0779047316', '4567', '7', 'M', 'S')
 ERROR - 2018-12-08 12:40:26 --> Query error: Duplicate entry 'SH001' for key 'shopCode' - Invalid query: INSERT INTO `shop` (`shopCode`, `email`, `ownerName`, `shopName`, `tele`, `mobile`, `creditLimit`, `repID`, `riskScore`, `size`) VALUES ('SH001', 'pnilupulee@yahoo.com', 'Yasara Peiris', 'Chicoree', '0779047316', '0779047316', '4567', '7', 'M', 'S')
+ERROR - 2018-12-08 12:45:38 --> Query error: Unknown column 'agent.agentID' in 'order clause' - Invalid query: SELECT *
+FROM `rep`
+JOIN `shop` ON `rep`.`repID` = `shop`.`repID`
+JOIN `orders` ON `orders`.`shopID` = `shop`.`shopID`
+JOIN `order_details` ON `orders`.`orderID` = `order_details`.`orderID`
+JOIN `equipment` ON `equipment`.`equipID` = `order_details`.`equipID`
+WHERE `rep`.`agentID` = '1'
+ORDER BY `agent`.`agentID` ASC, `equipment`.`equipID` ASC
+ERROR - 2018-12-08 15:02:25 --> Query error: Unknown column 'agent.adminID' in 'where clause' - Invalid query: SELECT distinct COUNT(*) as c
+FROM `rep`
+JOIN `shop` `s` ON `rep`.`repID` = `s`.`repID`
+JOIN `orders` `t` ON `t`.`shopID` = `s`.`shopID`
+JOIN `order_details` ON `t`.`orderID` = `order_details`.`orderID`
+WHERE `agent`.`adminID` = '1'
+AND `order_details`.`orderStatus` = 'Deliver-Ag'
+ERROR - 2018-12-08 15:11:04 --> Severity: Notice --> Undefined variable: inquirydata D:\wamp\www\Hardware_System\application\views\agent\inquiry.php 103
+ERROR - 2018-12-08 15:11:04 --> Severity: Notice --> Undefined variable: workdata D:\wamp\www\Hardware_System\application\views\agent\inquiry.php 156

@@ -8,30 +8,11 @@
 
 class CountModel extends CI_Model
 {
-    function getPendingOrderCount($adminID)
-    {
-
-    }
-
-    function getConfirmedOrderCount($agent_id)
-    {
-        $this->db->where('delete', 0);
-        $this->db->where('agent_id', $agent_id);
-        $this->db->where('status', 'notseen');
-        $this->db->from('inquiries');
-        $query1 = $this->db->get();
-        if ($query1->num_rows() > 0) {
-            return $query1->result();    // return a array of object
-        } else {
-            return NULL;
-        }
-    }
-
-    function getReceivedInquiryCount($adminID)
+    function getReceivedInquiryCount($ID, $type)
     {
         $this->db->select('COUNT(*) as c');
-        $this->db->where('senderID', $adminID);
-        $this->db->where('inquiryType', 'AgAd || Rpag');
+        $this->db->where('senderID', $ID);
+        $this->db->where('inquiryType', $type);
         $this->db->from('inquiry');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
@@ -41,11 +22,11 @@ class CountModel extends CI_Model
         }
     }
 
-    function getSentInquiryCount($adminID)
+    function getSentInquiryCount($ID, $type)
     {
         $this->db->select('COUNT(*) as c');
-        $this->db->where('senderID', $adminID);
-        $this->db->where('inquiryType', 'Adag');
+        $this->db->where('senderID', $ID);
+        $this->db->where('inquiryType', $type);
         $this->db->from('inquiry');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
@@ -100,4 +81,33 @@ class CountModel extends CI_Model
         }
     }
 
+    //Agent data
+    function getRepCountAgent($agentID)
+    {
+        $this->db->select('COUNT(*) as c');
+        $this->db->where('agentID', $agentID);
+        $this->db->where('rep.active', true);
+        $this->db->from('rep');
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            return $query1->result();    // return a array of object
+        } else {
+            return NULL;
+        }
+    }
+
+    function getShopCountAgent($agentID)
+    {
+        $this->db->select('COUNT(*) as c');
+        $this->db->where('agentID', $agentID);
+        $this->db->where('shop.active', true);
+        $this->db->from('rep');
+        $this->db->join('shop', 'rep.repID = shop.repID');
+        $query1 = $this->db->get();
+        if ($query1->num_rows() > 0) {
+            return $query1->result();    // return a array of object
+        } else {
+            return NULL;
+        }
+    }
 }

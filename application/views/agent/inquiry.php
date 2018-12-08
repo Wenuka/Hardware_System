@@ -36,11 +36,11 @@
 
     <![endif]-->
     <!-- jQuery 2.2.0 -->
-<!--    <script src="../../assets/plugins/jQuery/jQuery-2.2.0.min.js"></script>-->
-<!--    <!-- jQuery UI 1.11.4 -->
-<!--    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
-<!--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
+    <!--    <script src="../../assets/plugins/jQuery/jQuery-2.2.0.min.js"></script>-->
+    <!--    <!-- jQuery UI 1.11.4 -->
+    <!--    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>-->
+    <!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+    <!--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -70,7 +70,7 @@
                 <small>Control panel</small> Agent ID #<?php echo $_SESSION['agent_no']; ?>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Contact</a></li>
+                <li><a href="#"><i class="fa fa-dashboard"></i>Inquiry</a></li>
                 <li class="active">Dashboard</li>
             </ol>
         </section>
@@ -82,7 +82,7 @@
                      style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
                     <div class="box-header with-border" style="text-align: center;">
                         <h3 class="box-title"
-                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Inquiries</h3>
+                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Sent Inquiries</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body" style="padding:0 4%;">
@@ -91,8 +91,10 @@
                                cellspacing="0" width="100%">
                             <thead class="no-border">
                             <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                                <th data-priority="1" style="max-width:50px;">Order ID</th>
-                                <th data-priority="1" style="max-width:50px;">Filter ID</th>
+                                <th data-priority="1">Inquiry ID</th>
+                                <th data-priority="1">Inquiry Type</th>
+                                <th data-priority="1">Receiver Code</th>
+                                <th data-priority="1">Receiver Name</th>
                                 <th data-priority="4">Message</th>
                                 <th data-priority="5">Date</th>
                                 <th data-priority="2" style="max-width:90px;">Status</th>
@@ -100,24 +102,26 @@
                             </thead>
                             <tbody id="orderTable" style="text-align: center;">
                             <?php
-                            if (sizeof($inquirydata) > 0) {
-                                for ($i = 0; $i < sizeof($inquirydata); $i++) {
+                            if (sizeof($sentinquirydata) > 0) {
+                                for ($i = 0; $i < sizeof($sentinquirydata); $i++) {
                                     ?>
-                                    <tr style="text-align:left;" id="<?php echo $inquirydata[$i]->inquiry_id; ?>">
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->inquiry_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo ($inquirydata[$i]->filter_id == 0)?"By Admin":$inquirydata[$i]->filter_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->message; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $inquirydata[$i]->last_edittime; ?></td>
-                                        <?php if ($inquirydata[$i]->status == "confirm") {
-                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#daefdc;'>".$inquirydata[$i]->status."</td>";
+                                    <tr style="text-align:left;" id="<?php echo $sentinquirydata[$i]->inquiryID;  ?>">
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->inquiryID; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->inquiryType; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->agentCode; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->agentName; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->message; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $sentinquirydata[$i]->lastEditedTime; ?></td>
+                                        <?php if ($sentinquirydata[$i]->inquiryStatus == "not seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#daefdc;'>".$sentinquirydata[$i]->inquiryStatus."</td>";
                                         }
-                                        elseif ($inquirydata[$i]->status == "ignored") {
-                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#d8a9a5;'>".$inquirydata[$i]->status."</td>";
+                                        elseif ($sentinquirydata[$i]->inquiryStatus == "seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#d8a9a5;'>".$sentinquirydata[$i]->inquiryStatus."</td>";
                                         }
-                                        else{
-                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#FCF3CF;'>".$inquirydata[$i]->status."</td>";
+                                        else {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#FCF3CF;'>".$sentinquirydata[$i]->inquiryStatus."</td>";
                                         } ?>
-                                        
+
                                     </tr>
                                 <?php }
                             } ?>
@@ -129,45 +133,56 @@
                 </div>
                 <!-- /.box -->
             </div>
+            <!-- Small boxes (Stat box) -->
+            <!-- <br> -->
+        </section>
+        <section class="content" style="padding-right:5%;padding-left:5%;">
             <div class ="col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
 
-                <div id="about_web" class="box box-solid" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
+                <div id="about_web" class="box box-solid"
+                     style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
                     <div class="box-header with-border" style="text-align: center;">
                         <h3 class="box-title"
-                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Work</h3>
+                            style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;">All Received Inquiries</h3>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body" style="padding:0 4%;">
                         <br>
-                        <table id="worktable" class="table table-striped nowrap table-responsive"
+                        <table id="inquirytable" class="table table-striped nowrap table-responsive"
                                cellspacing="0" width="100%">
                             <thead class="no-border">
                             <tr style="text-align:center;color:#404040;font-size: 13px;font-weight: 200;">
-                                <th data-priority="1" style="max-width:50px;">Work ID</th>
-                                <th data-priority="2">Added Date</th>
-                                <th data-priority="3" style="max-width:50px;">Filter ID</th>
-                                <th data-priority="4">Plumber Name</th>
-                                <th data-priority="5">Description</th>
-                                <th data-priority="2" style="max-width:50px;" data-orderable="false">Photos</th>
+                                <th data-priority="1" style="max-width:50px;">Inquiry ID</th>
+                                <th data-priority="1" style="max-width:50px;">Inquiry Type</th>
+                                <th data-priority="1" style="max-width:50px;">Sender Code</th>
+                                <th data-priority="1" style="max-width:50px;">Sender Name</th>
+                                <th data-priority="4">Message</th>
+                                <th data-priority="5">Date</th>
+                                <th data-priority="2" style="max-width:90px;">Status</th>
                             </tr>
                             </thead>
-                            <tbody id="workorderTable" style="text-align: center;">
+                            <tbody id="orderTable" style="text-align: center;">
                             <?php
-                            if (sizeof($workdata) > 0) {
-                                for ($i = 0; $i < sizeof($workdata); $i++) {
+                            if (sizeof($receivedinquirydata) > 0) {
+                                for ($i = 0; $i < sizeof($receivedinquirydata); $i++) {
                                     ?>
-                                    <tr style="text-align:left;" id="<?php echo $workdata[$i]->work_id; ?>">
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $workdata[$i]->work_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $workdata[$i]->insert_time; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $workdata[$i]->filter_id; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $workdata[$i]->plumbername; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $workdata[$i]->description; ?></td>
-                                        <td style="border-right:1px solid #f4f4f4;">
-                                        <form method="post" action="<?php echo site_url(); ?>/AgentController/showPhotos">
-                                            <button type="submit" name="submit" class="btn hvr-shutter-in-horizontal" style="border:none;width:auto;margin-top:7%;text-align:right;" value="<?php echo $workdata[$i]->work_id; ?>">Check Photos</button>
-                                        </form>
-                                        </td>
-                                        
+                                    <tr style="text-align:left;" id="<?php echo $receivedinquirydata[$i]->inquiryID;  ?>">
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->inquiryID; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->inquiryType; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->agentCode; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->agentName; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->message; ?></td>
+                                        <td style="border-right:1px solid #f4f4f4;"><?php echo $receivedinquirydata[$i]->lastEditedTime; ?></td>
+                                        <?php if ($receivedinquirydata[$i]->inquiryStatus == "not seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#daefdc;'>".$receivedinquirydata[$i]->inquiryStatus."</td>";
+                                        }
+                                        elseif ($receivedinquirydata[$i]->inquiryStatus == "seen") {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#d8a9a5;'>".$receivedinquirydata[$i]->inquiryStatus."</td>";
+                                        }
+                                        else {
+                                            echo "<td style='border-right:1px solid #f4f4f4;background-color:#FCF3CF;'>".$receivedinquirydata[$i]->inquiryStatus."</td>";
+                                        } ?>
+
                                     </tr>
                                 <?php }
                             } ?>
@@ -184,10 +199,10 @@
         </section>
     </div>
     <div>
-    <?php
-    include 'footer.html';
-    ?>
-</div>
+        <?php
+        include 'footer.html';
+        ?>
+    </div>
 </div>
 
 
@@ -218,23 +233,17 @@
             responsive: true
         });
     });
-    $(document).ready(function () {
-        var table_checkin = $('#worktable').DataTable({
-            responsive: true
-        });
-    });
 
-
-       function showPhotos(workId) {
-           $.ajax({
-               type: 'POST',
-               data: {workId: workId},
-               url: "<?php echo base_url(); ?>index.php/AgentController/showPhotos",
-               success: function (data) {
-                   window.location.href = '<?php echo base_url(); ?>index.php/AgentController/showSliderPage(data='+data+')';
-               }
-           })
-       }
+    function showPhotos(workId) {
+        $.ajax({
+            type: 'POST',
+            data: {workId: workId},
+            url: "<?php echo base_url(); ?>index.php/AgentController/showPhotos",
+            success: function (data) {
+                window.location.href = '<?php echo base_url(); ?>index.php/AgentController/showSliderPage(data='+data+')';
+            }
+        })
+    }
 </script>
 
 </body>
