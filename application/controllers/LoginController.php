@@ -42,7 +42,7 @@ class LoginController extends CI_Controller
                 {
                     $usertype = $user[0]->usertype;
                     $_SESSION['usertype'] = $usertype;
-                    $userid = $user[0]->userID;
+                    $userid = $user[0]->foreignID;
                     $this->checkUserType($usertype, $userid);
                 }
                 else
@@ -180,6 +180,8 @@ class LoginController extends CI_Controller
 
         // Get admin data
         $agentdata = $this->AgentModel->agentData($agentID)[0];
+
+        $repdata = $this->AgentModel->getRepData($agentID);
 //        if(!$admindata->active)
 //        {
 //            $_SESSION['error'] = "Sorry, This admin is currently inactive";
@@ -218,7 +220,7 @@ class LoginController extends CI_Controller
 //
 //        $data = array(  'admindata' => $admindata,'grouporderdata'=>$grouporderdata, 'orderdata'=>$orderdata,'agentcount'=>$agentcount,'repcount'=>$repcount,'shopcount'=>$shopcount,'orderconfirmedcount'=>$orderconfirmedcount,'orderpendingcount'=>$orderpendingcount,'sentinquirycount'=>$sentinquirycount,'receivedinquirycount'=>$receivedinquirycount ); //,'inquirydata'=>$inquirydata
 
-        $data = array('agentdata'=>$agentdata,'grouporderdata'=>$grouporderdata);
+        $data = array('agentdata'=>$agentdata,'grouporderdata'=>$grouporderdata, 'repdata'=>$repdata);
 
         $this->load->view('agent/agentHome', $data);
     }

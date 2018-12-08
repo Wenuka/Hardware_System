@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Data:: Home</title>
+    <title>Admin Data:: My Shops</title>
     <link rel="shortcut icon" href="../../assets/images/favicon.ico"/>
 
     <!-- Tell the browser to be responsive to screen width -->
@@ -135,7 +135,7 @@
 
         <section class="content" id="content" style="padding-right:2%;padding-left:2%;">
             <div class ="col-lg-12 col-md-12 col-sm-12" id="content_lg" style="padding: 0;">
-                <?php foreach ($shopdata as $shop ){ ?>
+                <?php if(sizeof($shopdata)>0){ foreach ($shopdata as $shop ){ ?>
                     <div class="col-lg-3 col-md-3" id="ads">
                         <div id="about_web" class="box box-solid"
                              style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;height: 100%;">
@@ -158,7 +158,7 @@
                         </div>
 
                     </div>
-                <?php } ?>
+                <?php }} ?>
             </div>
             <!-- Small boxes (Stat box) -->
             <br>

@@ -277,7 +277,7 @@
                             <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
                             <div class="row" style="padding:0 20px 0 20px;">
                                 <div class="col-md-4">
-                                    <a href="#addAgent" data-toggle="modal"><i class='fas fa-user-plus'
+                                    <a href="#addRep" data-toggle="modal"><i class='fas fa-user-plus'
                                                                                style='font-size:48px;color:red'></i></a>
                                 </div>
                                 <div class="col-md-4">
@@ -323,7 +323,7 @@
                             <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
                             <div class="row" style="padding:0 20px 0 20px;">
                                 <div class="col-md-4">
-                                    <a href="#addInquiry" data-toggle="modal">
+                                    <a href="#addShop" data-toggle="modal">
                                         <i class="fa fa-plus-square-o"
                                            style="font-size:48px;color:red"></i></a>
                                 </div>
@@ -637,13 +637,13 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="addAgent" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="addRep" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content"
              style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Add Agent</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Add Rep</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -656,26 +656,148 @@
                             <!-- edit form column -->
                             <div class="box-body">
                                 <form class="is-readonly" method="POST"
-                                      action="<?php echo site_url(); ?>/AdminController/addNewAgent" id="form2"
+                                      action="<?php echo site_url(); ?>/AgentController/addNewRep" id="form2"
                                       role="form" data-toggle="validator">
                                     <div class="col-md-12" style="padding: 0;">
                                         <div class="col-md-6">
                                             <!-- <br> -->
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Agent Code</label>
-                                                <input type="text" name="agentCode" class="form-control"
-                                                       placeholder="Agent Code"
+                                                <label for="exampleInputEmail1">Rep Code</label>
+                                                <input type="text" name="repCode" class="form-control"
+                                                       placeholder="Rep Code"
                                                        required/>
                                             </div>
                                             <div class="form-group">
-                                                <label for="fullname">Full Name</label>
-                                                <input type="text" class="form-control" id="fullname" name="fullname"
+                                                <label for="repName">Full Name</label>
+                                                <input type="text" class="form-control" id="repName" name="repName"
                                                        placeholder="Full Name" required/>
                                             </div>
                                             <div class="form-group">
-                                                <label for="fullname">Province</label>
-                                                <input type="text" class="form-control" id="province" name="province"
-                                                       placeholder="Province" required/>
+                                                <label for="nic">NIC</label>
+                                                <input type="text" class="form-control" id="nic" name="nic"
+                                                       placeholder="NIC" required/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!-- <br> -->
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                       placeholder="Email"
+                                                       data-error="Bruh, that email address is invalid" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contact">Mobile</label>
+                                                <input type="tel" data-maxlength="10" data-minlength="10"
+                                                       class="form-control" id="contact" name="contact"
+                                                       placeholder="Telephone number format 0711234567 (length: 10 numbers)"
+                                                       pattern="[0-9]{10}" required/>
+                                                <div class="help-block with-errors">Format of the telephone number
+                                                    should be [0711234567]</div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="submit" id="save_btn"
+                                               class="btn btn-default btn-lg btn-save js-save"
+                                               style='float:right;background-color: #8892d6;color:white;font-size: inherit;margin-top: 5px;'/>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addShop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content"
+             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Add Shop</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding-right:5%;padding-left:5%;">
+                    <div class="col-lg-12 col-md-12 col-sm-12" style="padding: 0;">
+                        <div id="about_web" class="box box-solid">
+                            <div class="box-body">
+                                <form class="is-readonly" method="POST"
+                                      action="<?php echo site_url(); ?>/AgentController/addNewShop" id="form2"
+                                      role="form" data-toggle="validator">
+                                    <div class="col-md-12" style="padding: 0;">
+                                        <div class="col-md-6">
+                                            <!-- <br> -->
+                                            <div class="form-group">
+                                                <label for="shopCode">Shop Code</label>
+                                                <input type="text" name="shopCode" class="form-control"
+                                                       placeholder="Shop Code"
+                                                       required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Rep Code"></label>
+                                                <select class="form-control" id="repCode" name="repCode" required>
+                                                    <option disabled selected value="">-- Rep Code --</option>
+                                                    <?php foreach ($repdata as $rep){?>
+                                                    <option value='<?php echo $rep->repID ?>'><?php echo $rep->repCode ?></option>
+                                                   <?php }?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="ownerName">Owner Name</label>
+                                                <input type="text" class="form-control" id="ownerName" name="ownerName"
+                                                       placeholder="Full Name" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="contact">Tele</label>
+                                                <input type="tel" data-maxlength="10" data-minlength="10"
+                                                       class="form-control" id="tele" name="tele"
+                                                       placeholder="Telephone number format 0112343455  (length: 10 numbers)"
+                                                       pattern="[0-9]{10}" required/>
+                                                <div class="help-block with-errors">Format of the telephone number
+                                                    should be [0112435465]</div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="address">Address</label>
+                                                <input type="text" class="form-control" id="address" name="address"
+                                                       placeholder="Address" data-error="Bruh, that address is invalid"
+                                                       required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="size">Size</label>
+                                                <select class="form-control" id="size" name="size" required>
+                                                    <option disabled selected value="">-- Size --</option>
+                                                    <option value="S">Small</option>
+                                                    <option value="M">Medium</option>
+                                                    <option value="L">Large</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label for="shopName">Shop Name</label>
+                                                <input type="text" class="form-control" id="shopName" name="shopName"
+                                                       placeholder="Full Name" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Email address</label>
+                                                <input type="email" class="form-control" id="email" name="email"
+                                                       placeholder="Email"
+                                                       data-error="Bruh, that email address is invalid" required/>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="creditLimit">Credit Limit</label>
+                                                <input type="number" class="form-control" id="creditLimit" name="creditLimit"
+                                                       placeholder="creditLimit" data-error="Bruh, that address is invalid"
+                                                       required/>
                                             </div>
                                             <div class="form-group">
                                                 <label for="mobile">Mobile</label>
@@ -684,32 +806,17 @@
                                                        placeholder="Telephone number format 0711234567 (length: 10 numbers)"
                                                        pattern="[0-9]{10}" required/>
                                                 <div class="help-block with-errors">Format of the telephone number
-                                                    should be [0711234567] <!-- (length - 10 numbers.) --></div>
-                                                <!-- <div class="help"></div> -->
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <!-- <br> -->
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Address</label>
-                                                <input type="text" class="form-control" id="address" name="address"
-                                                       placeholder="Address" data-error="Bruh, that address is invalid"
-                                                       required/>
+                                                    should be [0711234567]</div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Town</label>
-                                                <input type="text" class="form-control" id="town" name="town"
-                                                       placeholder="Town" data-error="Bruh, that town is invalid"
-                                                       required/>
+                                                <label for="riskScore">Risk Score</label>
+                                                <select class="form-control" id="riskScore" name="riskScore" required>
+                                                    <option disabled selected value="">-- Risk Score --</option>
+                                                    <option value="G">Good</option>
+                                                    <option value="M">Medium</option>
+                                                    <option value="R">Risky</option>
+                                                </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="exampleInputEmail1">Email address</label>
-                                                <input type="email" class="form-control" id="email" name="email"
-                                                       placeholder="Email"
-                                                       data-error="Bruh, that email address is invalid" required/>
-                                            </div>
-
-                                            <!-- <input type="submit" class="form-control" name="submit"> -->
                                         </div>
 
                                     </div>

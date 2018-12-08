@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Admin Data:: My Reps</title>
+    <title>Agent Data:: My Reps</title>
     <link rel="shortcut icon" href="../../assets/images/favicon.ico"/>
 
     <!-- Tell the browser to be responsive to screen width -->
@@ -115,16 +115,16 @@
     <header class="main-header">
         <!-- Logo -->
         <!-- Header Navbar: style can be found in header.less -->
-        <?php include 'adminTopMost.php'; ?>
+        <?php include 'agentTopMost.php'; ?>
     </header>
     <!-- Left side column. contains the logo and sidebar -->
-    <?php include 'adminSidebar.php'; ?>
+    <?php include 'agentSidebar.php'; ?>
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="background-color:ghostwhite;">
         <!-- Content Header (Page header) -->
         <section class="content-header" style="padding-right:5%;padding-left:5%;padding-top:2%;">
             <h1 style="font-size: 1em;font-weight: bold;text-transform: capitalize;">
-                <small>Control panel</small> Admin ID #<?php echo $_SESSION['admin_no']; ?>
+                <small>Control panel</small> Agent ID #<?php echo $_SESSION['agent_no']; ?>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -135,31 +135,31 @@
 
         <section class="content" id="content" style="padding-right:2%;padding-left:2%;">
             <div class ="col-lg-12 col-md-12 col-sm-12" id="content_lg" style="padding: 0;">
-                <?php
-                if(sizeof($repdata)>0){
-                foreach ($repdata as $rep){ ?>
+                <?php if(sizeof($repdata)>0){ foreach ($repdata as $rep){ ?>
                     <div class="col-lg-3 col-md-3" id="ads">
                         <div id="about_web" class="box box-solid"
-                             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;height: 100%;">
+                             style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);border-top: 3px solid #d2d6de;">
                             <div class="box-header with-border" style="text-align: center;">
                                 <h3 class="box-title"
                                     style="text-align: center;color:dimgrey;padding-top:6px;font-weight: bold;font-size: 18px;"><?php echo "$rep->repCode<br>"; ?></h3>
                             </div>
+
                             <div class="box-body" style="padding:4%;">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <img src='<?php echo $rep->repImagePath!=""?$rep->repImagePath:"../../assets/images/admin/avatar.png" ?>'  style='border-radius: 40%;width: 100%' height="140px" width="140px" class="img-circle" alt="User Image">
+                                    <img src='<?php  if($rep->repImagePath != ""){echo $rep->repImagePath; }else{
+                                        echo "../../assets/images/admin/avatar.png";
+                                    } ?>'  style='border-radius: 40%;width: 100%' height="140px" width="140px" class="img-circle" alt="User Image">
                                     <hr style="border: 1px solid rgba(0, 0, 0, 0.3);">
                                     <h4 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$rep->repName<br>"; ?></h4>
                                     <h5 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$rep->contact<br>"; ?></h5>
                                     <div style="text-align: center;">
-                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default" data-todo='<?php  echo json_encode($rep) ?>' id='<?php echo $rep->repID; ?>' data-id='<?php echo $rep->repID;  ?>'  data-toggle="modal" data-target="#repModal">More details</button>
+                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default" data-todo='<?php  echo json_encode($rep) ?>' id='<?php echo $rep->repID; ?>' data-id='<?php echo $rep->repID; ?>'  data-toggle="modal" data-target="#repModal">More details</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 <?php }} ?>
             </div>
@@ -177,7 +177,6 @@
                         </button>
                     </div>
                     <div class="modal-body">
-
                         <div class="row" style="font-size: 15px;">
                             <div class="col-lg-4 col-md-4">
                                 <img src="../../assets/images/admin/avatar.png" id="repImage"
@@ -198,15 +197,9 @@
 
                                 </div>
                                 <div class="col-lg-6 col-md-6 modalLbl">
-                                    Agent ID
+                                    Rep Contact
                                 </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="agentID">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Contact
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="contact">
+                                <div class="col-lg-6 col-md-6 modalTxt" id="repContact">
 
                                 </div>
                                 <div class="col-lg-6 col-md-6 modalLbl">
@@ -228,12 +221,11 @@
 
                                 </div>
                                 <div class="col-lg-6 col-md-6 modalLbl">
-                                   NIC
+                                    NIC
                                 </div>
                                 <div class="col-lg-6 col-md-6 modalTxt" id="nic">
 
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -245,7 +237,6 @@
     include 'footer.html';
     ?>
 </div>
-
 <script>
     $(document).ready(function () {
         // $('[data-toggle="modal"]').on('click', function (e) {
@@ -256,31 +247,23 @@
             $('#repCode').empty();
             $('#repCode').append('<p>' + repCode + '</p>');
 
-            var repImage = $(variable).data('todo').imagePath;
+            var repImage = $(variable).data('todo').repImagePath;
             if (repImage != "") {
-                $('#repImage').attr("src", repImage);
+                $('#repImagePath').attr("src", repImage);
             }
 
             var repName = $(variable).data('todo').repName;
             $('#repName').empty();
             $('#repName').append('<p>' + repName + '</p>');
 
-            var agentID = $(variable).data('todo').agentID;
-            $('#agentID').empty();
-            $('#agentID').append('<p>' + agentID + '</p>');
+            var repContact = $(variable).data('todo').contact;
+            $('#repContact').empty();
+            $('#repContact').append('<p>' + repContact + '</p>');
 
-            var address = $(variable).data('todo').address;
-            $('#agentAddress').empty();
-            $('#agentAddress').append('<p>' + address + '</p>');
-            //
-            var contact = $(variable).data('todo').contact;
-            $('#contact').empty();
-            $('#contact').append('<p>' + contact + '</p>');
-            //
             var email = $(variable).data('todo').email;
             $('#email').empty();
             $('#email').append('<p>' + email + '</p>');
-            //
+
             var nic = $(variable).data('todo').nic;
             $('#nic').empty();
             $('#nic').append('<p>' + nic + '</p>');
@@ -295,7 +278,6 @@
         });
     });
 </script>
-
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button);

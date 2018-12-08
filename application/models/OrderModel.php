@@ -86,7 +86,7 @@ class OrderModel extends CI_Model
         $this->db->join('rep', 'agent.agentID = rep.agentID');
         $this->db->join('shop s', 'rep.repID = s.repID');
         $this->db->join('orders t', 't.shopID = s.shopID');
-        $this->db->join('order_details', 'orders.orderID = order_details.orderID');
+        $this->db->join('order_details', 't.orderID = order_details.orderID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
             return $query1->result();    // return a array of object
@@ -104,7 +104,7 @@ class OrderModel extends CI_Model
         $this->db->join('rep', 'agent.agentID = rep.agentID');
         $this->db->join('shop s', 'rep.repID = s.repID');
         $this->db->join('orders t', 't.shopID = s.shopID');
-        $this->db->join('order_details', 'orders.orderID = order_details.orderID');
+        $this->db->join('order_details', 't.orderID = order_details.orderID');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {
             return $query1->result();    // return a array of object
@@ -116,14 +116,14 @@ class OrderModel extends CI_Model
 
     function getOrderDetailsRequiredToAdmin($agentID)
     {
-        $this->db->select('SUM(d.orderCount) as orderCount,r.repID,r.repCode,e.*,d.status');
-        $this->db->where('r.agentID', $agentID);
+        $this->db->select('SUM(d.orderCount) as orderCount,e.*,d.status,r.*');
+        //$this->db->where('r.agentID', $agentID);
         $this->db->from('rep r');
         $this->db->join('shop s', 'r.repID = s.repID');
         $this->db->join('orders t', 't.shopID = s.shopID');
         $this->db->join('order_details d', 't.orderID = d.orderID');
         $this->db->join('equipment e', 'e.equipID = d.equipID');
-        $this->db->group_by('e.equipID, d.status');
+        //$this->db->group_by('e.equipID, d.status');
         $this->db->order_by('e.equipID', 'asc');
         $query1 = $this->db->get();
         if ($query1->num_rows() > 0) {

@@ -15,6 +15,51 @@ class AgentModel extends CI_Model
         }
     }
 
+    function getRepData($agentID)
+    {
+        $this->db->select("rep.*");
+        $this->db->where('rep.active', 1);
+        $this->db->where('agentID', $agentID);
+        $this->db-> from(Constants::$repTbl);
+        $query1 = $this->db->get();
+        if ($query1-> num_rows() > 0){
+            return $query1->result();    // return a array of object
+        }
+        else{
+            return NULL;
+        }
+    }
+
+    function getShopData($agentID)
+    {
+        $this->db->select("shop.*");
+        $this->db->where('shop.active', 1);
+        $this->db->where('agentID', $agentID);
+        $this->db-> from(Constants::$repTbl);
+        $this->db->join(Constants::$shopTbl, 'shop.repID = rep.repID');
+        $query1 = $this->db->get();
+        if ($query1-> num_rows() > 0){
+            return $query1->result();    // return a array of object
+        }
+        else{
+            return NULL;
+        }
+    }
+
+
+
+    function addRep($results)
+    {
+        $this->db->insert('rep', $results);
+        return $this->db->insert_id();
+    }
+
+    function addShop($results)
+    {
+        $this->db->insert('shop', $results);
+        return $this->db->insert_id();
+    }
+
 //    function inquiryData($agent_id)
 //    {
 //        $this->db->where('delete', 0);
