@@ -47,9 +47,9 @@ class LoginModel extends CI_Model
 			return NULL;	
 		}
 	}
-	function loginData($agent_id, $usertype){
+	function loginData($login_id, $usertype){
 		$this->db->where('usertype', $usertype);
-		$this->db->where('userID', $agent_id);
+		$this->db->where('userID', $login_id);
 		$this->db-> from('login');
 		$query1 = $this->db->get();
 		if ($query1-> num_rows() > 0){

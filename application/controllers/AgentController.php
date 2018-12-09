@@ -160,6 +160,24 @@ class AgentController extends CI_Controller
         $data = array('sentinquirydata' => $sentinquirydata, 'receivedinquirydata' => $receivedinquirydata);
         $this->load->view('agent/inquiry', $data);
     }
+    public function viewAgent()
+    {
+        $this->load->library('Constants');
+        $this->load->library('session');
+        $agentID = $this->getSessionAgentID();
+
+        if ($agentID == null) {
+            $_SESSION['error'] = 'Something is wrong. Please contact your system administrator.';
+            redirect();
+        }
+        $agent_id = $_SESSION['agent_no'];
+        $this->load->model('LoginModel');
+        $agentdata = $this->LoginModel->agentData($agent_id)[0];
+        $logindata = $this->LoginModel->loginData($_SESSION['login_id'],Constants::$agent)[0];
+        // $_SESSION['login_id'] = $logindata->userID;
+        $data = array('agentdata' => $agentdata, 'logindata' => $logindata);
+        $this->load->view('agent/agentDetails', $data);
+    }
 
     public function viewOrderDetail(){
         $this->load->model('OrderModel');

@@ -183,7 +183,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Confirmed Orders</p>
+                            <p style="margin-bottom: 0;">Confirmed Orders</p>
                             <p style="font-size:35px;margin-bottom: 0;">1</p>
                         </div>
                         <div class="icon">
@@ -197,7 +197,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Pending Orders</p>
+                            <p style="margin-bottom: 0;">Pending Orders</p>
                             <p style="font-size:35px;margin-bottom: 0;">2</p>
                         </div>
                         <div class="icon">
@@ -211,7 +211,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Received Inquiries</p>
+                            <p style="margin-bottom: 0;">Received Inquiries</p>
                             <p style="font-size:35px;margin-bottom: 0;">2</p>
                         </div>
                         <div class="icon">
@@ -225,7 +225,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Sent Inquiries</p>
+                            <p style="margin-bottom: 0;">Sent Inquiries</p>
                             <p style="font-size:35px;margin-bottom: 0;">3</p>
                         </div>
                         <div class="icon">
@@ -241,7 +241,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Reps</p>
+                            <p style="margin-bottom: 0;">Rep Count</p>
                             <p style="font-size:35px;margin-bottom: 0;">7</p>
                         </div>
                         <div class="icon">
@@ -255,7 +255,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Shops</p>
+                            <p style="margin-bottom: 0;">Shop Count</p>
                             <p style="font-size:35px;margin-bottom: 0;">7</p>
                         </div>
                         <div class="icon">

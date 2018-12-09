@@ -37,11 +37,11 @@ class LoginController extends CI_Controller
                 $username = stripslashes($username);
                 $password = stripslashes($password);
                 $user = $this->LoginModel->authenticate($username, $password);
-
                 if (!empty($user))
                 {
                     $usertype = $user[0]->usertype;
                     $_SESSION['usertype'] = $usertype;
+                    $_SESSION['login_id'] = $user[0]->userID;
                     $userid = $user[0]->foreignID;
                     $this->checkUserType($usertype, $userid);
                 }
