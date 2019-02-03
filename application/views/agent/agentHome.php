@@ -155,7 +155,7 @@
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" style="background-color: ghostwhite;">
     <header class="main-header">
         <!-- Logo -->
         <!-- Header Navbar: style can be found in header.less -->
@@ -487,10 +487,14 @@
             </div>
             <br>
         </section>
+        <div class="col-md-12">
+            <?php
+            include 'footer.html';
+            ?>
+
+        </div>
     </div>
-    <?php
-    include 'footer.html';
-    ?>
+
 </div>
 <!-- Modal -->
 <div class="modal fade" id="exampleModalGroupData" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"

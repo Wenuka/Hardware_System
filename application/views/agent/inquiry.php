@@ -197,12 +197,12 @@
             <!-- Small boxes (Stat box) -->
             <!-- <br> -->
         </section>
+        <div class="col-md-12" style="bottom: 0;position:absolute; ">
+            <?php
+            include 'footer.html';
+            ?></div>
     </div>
-    <div>
-        <?php
-        include 'footer.html';
-        ?>
-    </div>
+
 </div>
 
 
@@ -245,7 +245,15 @@
         })
     }
 </script>
+<script>
+    $(document).ready(function () {
+        // code here
+        var h = window.innerHeight;
+        var header = $('.main-header').height();
 
+        $('.content-wrapper').css("min-height",h-header);
+    });
+</script>
 </body>
 </html>
 

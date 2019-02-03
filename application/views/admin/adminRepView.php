@@ -166,84 +166,86 @@
             <!-- Small boxes (Stat box) -->
             <br>
         </section>
-        <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-             aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Rep Details</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
+        <div class="col-md-12" style="bottom: 0; position: absolute;">
+        <?php
+        include 'footer.html';
+        ?></div>
+    </div>
+
+</div>
+<div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="float: left;font-size: 20px;">Rep Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <div class="row" style="font-size: 15px;">
+                    <div class="col-lg-4 col-md-4">
+                        <img src="../../assets/images/admin/avatar.png" id="repImage"
+                             style='border-radius: 100%;max-height:140px;max-width:140px;' class="img-circle"
+                             alt="Rep Image">
                     </div>
-                    <div class="modal-body">
-
-                        <div class="row" style="font-size: 15px;">
-                            <div class="col-lg-4 col-md-4">
-                                <img src="../../assets/images/admin/avatar.png" id="repImage"
-                                     style='border-radius: 100%;max-height:140px;max-width:140px;' class="img-circle"
-                                     alt="Rep Image">
-                            </div>
-                            <div class="col-lg-8 col-md-8">
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Rep Code
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="repCode">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Rep Name
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="repName">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Agent ID
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="agentID">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Contact
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="contact">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Email
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="email">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Status
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="status">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                    Added Date
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="addedDate">
-
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalLbl">
-                                   NIC
-                                </div>
-                                <div class="col-lg-6 col-md-6 modalTxt" id="nic">
-
-                                </div>
-
-                            </div>
+                    <div class="col-lg-8 col-md-8">
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Rep Code
                         </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="repCode">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Rep Name
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="repName">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Agent ID
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="agentID">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Contact
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="contact">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Email
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="email">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Status
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="status">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            Added Date
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="addedDate">
+
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalLbl">
+                            NIC
+                        </div>
+                        <div class="col-lg-6 col-md-6 modalTxt" id="nic">
+
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <?php
-    include 'footer.html';
-    ?>
 </div>
 
 <script>

@@ -48,7 +48,7 @@
     <script src="../../assets/photo-slider/jssor.slider-21.1.6.mini.js" type="text/javascript"></script>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" style="background-color: ghostwhite;">
     <header class="main-header">
         <!-- Logo -->
         <!-- Header Navbar: style can be found in header.less -->
@@ -197,12 +197,12 @@
             <!-- Small boxes (Stat box) -->
             <!-- <br> -->
         </section>
+        <div class="col-md-12" style="bottom: 0;position:absolute; ">
+            <?php
+            include 'footer.html';
+            ?></div>
     </div>
-    <div>
-    <?php
-    include 'footer.html';
-    ?>
-</div>
+
 </div>
 
 
@@ -245,7 +245,15 @@
        })
    }
 </script>
+<script>
+    $(document).ready(function () {
+        // code here
+        var h = window.innerHeight;
+        var header = $('.main-header').height();
 
+        $('.content-wrapper').css("min-height",h-header);
+    });
+</script>
 </body>
 </html>
 

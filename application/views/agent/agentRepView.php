@@ -232,10 +232,12 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-12" style="bottom: 0; position: absolute;">
+            <?php
+            include 'footer.html';
+            ?></div>
     </div>
-    <?php
-    include 'footer.html';
-    ?>
+
 </div>
 <script>
     $(document).ready(function () {

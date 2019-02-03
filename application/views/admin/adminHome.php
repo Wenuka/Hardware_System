@@ -155,7 +155,7 @@
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" style="background-color: ghostwhite;">
     <header class="main-header">
         <!-- Logo -->
         <!-- Header Navbar: style can be found in header.less -->
@@ -183,7 +183,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Confirmed Orders</p>
+                            <p style="margin-bottom: 0;">Confirmed Orders</p>
                             <p style="font-size:35px;margin-bottom: 0;"><?php echo($orderconfirmedcount->c) ?></p>
                         </div>
                         <div class="icon">
@@ -197,7 +197,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Pending Orders</p>
+                            <p style="margin-bottom: 0;">Pending Orders</p>
                             <p style="font-size:35px;margin-bottom: 0;"><?php echo($orderpendingcount->c) ?></p>
                         </div>
                         <div class="icon">
@@ -211,7 +211,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Received Inquiries</p>
+                            <p style="margin-bottom: 0;">Received Inquiries</p>
                             <p style="font-size:35px;margin-bottom: 0;"><?php echo($receivedinquirycount->c) ?></p>
                         </div>
                         <div class="icon">
@@ -225,7 +225,7 @@
                     <div class="small-box " style="padding: 1%;">
                         <div class="inner" style="color: #555555;background-color: white;padding: 10px;">
                             <h3 id="orders" style="color: black"></h3>
-                            <p style="margin-bottom: 0;">No Of Sent Inquiries</p>
+                            <p style="margin-bottom: 0;">Sent Inquiries</p>
                             <p style="font-size:35px;margin-bottom: 0;"><?php echo($sentinquirycount->c) ?></p>
                         </div>
                         <div class="icon">
@@ -503,11 +503,11 @@
             </div>
             <br>
         </section>
-        <section class="content">
+        <div class="col-md-12">
             <?php
             include 'footer.html';
             ?>
-        </section>
+
     </div>
 
 </div>

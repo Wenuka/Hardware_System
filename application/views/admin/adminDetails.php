@@ -71,7 +71,7 @@
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+<div class="wrapper"  style="background-color: ghostwhite;">
     <header class="main-header">
         <!-- Logo -->
         <!-- Header Navbar: style can be found in header.less -->
@@ -256,12 +256,13 @@
             <!-- Small boxes (Stat box) -->
             
         </section>
+        <div class="col-md-12">
+            <?php
+            include 'footer.html';
+            ?>
+
+        </div>
     </div>
-    <div>
-    <?php
-    include 'footer.html';
-    ?>
-</div>
 </div>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

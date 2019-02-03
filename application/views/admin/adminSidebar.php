@@ -1,5 +1,5 @@
 <?php ?>
-<aside class="main-sidebar" style="">
+<aside class="main-sidebar" style="background-color: #222d32;">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar" style="">
         <!-- Sidebar user panel -->
@@ -56,3 +56,12 @@
     <!-- /.sidebar -->
 </aside>
 
+<script>
+    $(window).bind("load", function() {
+        // code here
+        var h = window.innerHeight;
+        var header = $('.main-header').height();
+
+        $('.content-wrapper').css("min-height",h-header);
+    });
+</script>
