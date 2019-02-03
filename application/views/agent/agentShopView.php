@@ -151,7 +151,7 @@
                                     <h5 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$shop->tele<br>"; ?></h5>
                                     <div style="text-align: center;">
-                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default" data-todo='<?php  echo json_encode($shop) ?>' id='<?php echo $shop->shopID; ?>' data-id='<?php echo $shop->shopID;  ?>' data-toggle="modal" data-target="#shopModal">More details</button>
+                                        <button type="button" style="margin-bottom: 3%;background-color: maroon;color: white;" class="btn btn-default" data-todo='<?php  echo json_encode($shop) ?>' id='<?php echo $shop->shopID; ?>' data-id='<?php echo $shop->shopID;  ?>' data-toggle="modal" data-target="#shopModal">More details</button>
                                     </div>
                                 </div>
                             </div>

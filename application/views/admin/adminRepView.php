@@ -154,7 +154,7 @@
                                     <h5 class="box-title"
                                         style="text-align: center;color:black;padding-top:3px;font-weight: bold;"><?php echo "$rep->contact<br>"; ?></h5>
                                     <div style="text-align: center;">
-                                        <button type="button" style="margin-bottom: 3%;" class="btn btn-default" data-todo='<?php  echo json_encode($rep) ?>' id='<?php echo $rep->repID; ?>' data-id='<?php echo $rep->repID;  ?>'  data-toggle="modal" data-target="#repModal">More details</button>
+                                        <button type="button" style="margin-bottom: 3%;color: white;background-color: maroon;" class="btn btn-default" data-todo='<?php  echo json_encode($rep) ?>' id='<?php echo $rep->repID; ?>' data-id='<?php echo $rep->repID;  ?>'  data-toggle="modal" data-target="#repModal">More details</button>
                                     </div>
                                 </div>
                             </div>

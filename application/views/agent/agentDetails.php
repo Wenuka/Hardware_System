@@ -41,12 +41,12 @@
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <style type="text/css">
       form {
-        &.is-readonly {
+        .is-readonly {
           .btn-save {
             display: none;
           }
           input,textarea{
-            &[disabled] {
+            [disabled] {
               cursor: text;
               background-color: #fff;
               border-color: transparent;
@@ -55,7 +55,7 @@
             }
           }
         }
-        &.is-editing { 
+        .is-editing {
           .btn-edit{
             display: none;
           }
@@ -68,6 +68,10 @@
       .box{
         box-shadow: none !important;
       }
+      .form-control[disabled]
+        {
+            background-color:white;
+        }
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -130,7 +134,7 @@
                                     <input type="file" id="imgUploadId" name="imgUpload"  accept="image/jpeg, image/png" required/>
                                     <!-- <input type="hidden" id="usernameHid" value="<?php //echo $data1->username; ?>" > -->
                                     <br>
-                                    <button type="button" id="uploadBtn" class="btn btn-default btn-lg btn-save js-save" style='background-color: #8892d6;color:white;font-size: inherit;' >Submit</button>
+                                    <button type="button" id="uploadBtn" class="btn btn-default btn-lg btn-save js-save" style='background-color: maroon;color:white;font-size: inherit;' >Submit</button>
 
 
                                     <?php //$_SESSION['username'] = $data1->username; //$_SESSION['owner_id'] =$data1->owner_id;?>
@@ -191,8 +195,8 @@
                                 </script>
                                 <!-- edit form column -->
                                 <div class="col-md-9">
-                                  <button type="button" id="save_btn" class="btn btn-default btn-lg btn-save js-save" style='float:right;background-color: #8892d6;color:white;font-size: inherit;' disabled>Save</button>
-                                  <button type="button" id="edit_btn" class="btn btn-default btn-lg btn-edit js-edit" style='float:right;background-color:#8892d6;color:white;font-size: inherit;'>Edit</button>
+                                  <button type="button" id="save_btn" class="btn btn-default btn-lg btn-save js-save" style='float:right;background-color: maroon;color:white;font-size: inherit;' disabled>Save</button>
+                                  <button type="button" id="edit_btn" class="btn btn-default btn-lg btn-edit js-edit" style='float:right;background-color:maroon;color:white;font-size: inherit;'>Edit</button>
                                   <h4 style="text-align:left;color:dimgrey;padding-bottom:6px;border-bottom:1px solid #f4f4f4;">Personal Info</h4>  
                                   <form class="is-readonly" method="POST" action="<?php echo site_url(); ?>/AgentController/editMyAccount" id="form2" role="form" data-toggle="validator">
                                     <!-- <input type="hidden" value = "<?php //echo $data1->login_id; ?>" name="login_id" id="login_id">

@@ -278,13 +278,13 @@
                             <div class="row" style="padding:0 20px 0 20px;">
                                 <div class="col-md-4">
                                     <a href="#addRep" data-toggle="modal"><i class='fas fa-user-plus'
-                                                                               style='font-size:48px;color:red'></i></a>
+                                                                               style='font-size:48px;color:maroon'></i></a>
                                 </div>
                                 <div class="col-md-4">
-                                    <i class='fas fa-user-edit' style='font-size:48px;color:red'></i>
+                                    <i class='fas fa-user-edit' style='font-size:48px;color:maroon'></i>
                                 </div>
                                 <div class="col-md-4">
-                                    <i class='fas fa-user-minus' style='font-size:48px;color:red'></i>
+                                    <i class='fas fa-user-minus' style='font-size:48px;color:maroon'></i>
                                 </div>
                             </div>
                         </div>
@@ -301,13 +301,13 @@
                             <div class="row" style="padding:0 20px 0 20px;">
                                 <div class="col-md-4">
                                     <a href="#addInquiry" data-toggle="modal"><i class="fa fa-plus"
-                                                                                 style="font-size:48px;color:red"></i></a>
+                                                                                 style="font-size:48px;color:maroon"></i></a>
                                 </div>
                                 <div class="col-md-4">
-                                    <i class="fa fa-check" style="font-size:48px;color:red"></i>
+                                    <i class="fa fa-check" style="font-size:48px;color:maroon"></i>
                                 </div>
                                 <div class="col-md-4">
-                                    <i class="fa fa-times" style="font-size:48px;color:red"></i>
+                                    <i class="fa fa-times" style="font-size:48px;color:maroon"></i>
                                 </div>
                             </div>
                         </div>
@@ -325,13 +325,13 @@
                                 <div class="col-md-4">
                                     <a href="#addShop" data-toggle="modal">
                                         <i class="fa fa-plus-square-o"
-                                           style="font-size:48px;color:red"></i></a>
+                                           style="font-size:48px;color:maroon;"></i></a>
                                 </div>
                                 <div class="col-md-4">
-                                    <i class="fa fa-check-square-o" style="font-size:48px;color:red"></i>
+                                    <i class="fa fa-check-square-o" style="font-size:48px;color:maroon"></i>
                                 </div>
                                 <div class="col-md-4">
-                                    <i class="fa fa-minus-square-o" style="font-size:48px;color:red"></i>
+                                    <i class="fa fa-minus-square-o" style="font-size:48px;color:maroon"></i>
                                 </div>
                             </div>
                         </div>
