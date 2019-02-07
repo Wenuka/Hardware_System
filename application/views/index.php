@@ -33,7 +33,7 @@
 </head>
 
 <body class="hold-transition login-page " style="background-color: aliceblue;">
-<!-- particles.js container --> <div id="particles-js"></div> <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib --> <script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+<!-- particles.js container --> <div id="particles-js"></div> <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib --> <script src="https://threejs.org/examples/js/libs/stats.min.js"></script>
 <?php
 if (!empty($_SESSION['error'])) {
     echo "<div class='alert alert-info' style='margin-bottom: 0;'><strong>Warning! </strong> ".$_SESSION['error']."</div>";
