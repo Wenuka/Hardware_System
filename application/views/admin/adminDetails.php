@@ -126,14 +126,11 @@
                                     else {echo '<img src="../../assets/images/admin/avatar.png" width=200 height=200 class="avatar img-circle" alt="avatar">';}  ?>
 
                                     <h6> Upload a different photo...</h6>
-                                    <!-- <input type="file" class="form-control"> -->
                                     <input type="file" id="imgUploadId" name="imgUpload"  accept="image/jpeg, image/png" required/>
-                                    <!-- <input type="hidden" id="usernameHid" value="<?php //echo $data1->username; ?>" > -->
                                     <br>
                                     <button type="button" id="uploadBtn" class="btn btn-default btn-lg btn-save js-save" style='background-color: maroon;color:white;font-size: inherit;' >Submit</button>
 
 
-                                    <?php //$_SESSION['username'] = $data1->username; //$_SESSION['owner_id'] =$data1->owner_id;?>
                                   </div>
                                 </div>
 
@@ -304,7 +301,6 @@
       var isReadonly  = $form.hasClass('is-readonly');
       $form.find('input,textarea').prop('disabled', isReadonly);
       document.getElementById("username").disabled = true;
-      // document.getElementById("dob").disabled = true;
       document.getElementById("save_btn").disabled = false;
       document.getElementById("edit_btn").disabled = true;
     });
