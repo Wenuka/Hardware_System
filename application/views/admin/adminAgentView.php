@@ -122,6 +122,12 @@
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper" style="background-color:ghostwhite;">
         <!-- Content Header (Page header) -->
+        <?php
+        if (!empty($_SESSION['alert'])) {
+            echo "<div class='alert alert-info' style='margin-bottom: 0;'><strong>Alert! </strong> ".$_SESSION['alert']."</div>";
+            unset($_SESSION['alert']);
+        }
+        ?>
         <section class="content-header" style="padding-right:5%;padding-left:5%;padding-top:2%;">
             <h1 style="font-size: 1em;font-weight: bold;text-transform: capitalize;">
                 <small>Control panel</small> Admin ID #<?php echo $_SESSION['admin_no']; ?>
