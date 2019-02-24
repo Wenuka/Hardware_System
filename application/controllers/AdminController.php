@@ -50,8 +50,8 @@ class AdminController extends CI_Controller
                 $admin_id = $_SESSION['admin_no'];
                 //Get agent data
                 $agentdata = $this->AdminModel->getAgentData($admin_id);
-
-                $data = array('agentdata' => $agentdata);
+                $admindata = $this->AdminModel->adminData($admin_id)[0];
+                $data = array('agentdata' => $agentdata,'admindata'=>$admindata);
                 $this->load->view('admin/adminAgentView', $data);
             } else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
@@ -118,8 +118,8 @@ class AdminController extends CI_Controller
                 $admin_id = $_SESSION['admin_no'];
                 //Get agent data
                 $repdata = $this->AdminModel->getRepData($admin_id);
-
-                $data = array('repdata' => $repdata);
+                $admindata = $this->AdminModel->adminData($admin_id)[0];
+                $data = array('repdata' => $repdata,'admindata'=>$admindata);
                 $this->load->view('admin/adminRepView', $data);
             } else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
@@ -141,8 +141,8 @@ class AdminController extends CI_Controller
                 $admin_id = $_SESSION['admin_no'];
                 //Get agent data
                 $shopdata = $this->AdminModel->getShopData($admin_id);
-
-                $data = array('shopdata' => $shopdata);
+                $admindata = $this->AdminModel->adminData($admin_id)[0];
+                $data = array('shopdata' => $shopdata,'admindata'=>$admindata);
                 $this->load->view('admin/adminShopView', $data);
             } else {
                 $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code B001.";
@@ -154,26 +154,26 @@ class AdminController extends CI_Controller
         }
     }
 
-    public function viewContact()
-    {
-        $this->load->library('Constants');
-        $this->load->library('session');
-        if (isset($_SESSION['usertype'])) {
-            if (($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
-                $admin_id = $_SESSION['admin_no'];
-                $this->load->model('LoginModel');
-                $admindata = $this->LoginModel->adminData($admin_id)[0];
-                $data = array('admindata' => $admindata);
-                $this->load->view('admin/contact', $data);
-            } else {
-                $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";
-                redirect();
-            }
-        } else {
-            $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
-            redirect();
-        }
-    }
+    // public function viewContact()
+    // {
+    //     $this->load->library('Constants');
+    //     $this->load->library('session');
+    //     if (isset($_SESSION['usertype'])) {
+    //         if (($_SESSION['usertype'] == Constants::$admin || $_SESSION['usertype'] == "superadmin") && isset($_SESSION['admin_no'])) {
+    //             $admin_id = $_SESSION['admin_no'];
+    //             $this->load->model('LoginModel');
+    //             $admindata = $this->LoginModel->adminData($admin_id)[0];
+    //             $data = array('admindata' => $admindata);
+    //             $this->load->view('admin/contact', $data);
+    //         } else {
+    //             $_SESSION['error'] = "Something is wrong. Please contact the system administrator. Error code C004.";
+    //             redirect();
+    //         }
+    //     } else {
+    //         $_SESSION['error'] = "Your session has expired. Please log in again for your own safety.";
+    //         redirect();
+    //     }
+    // }
 
     public function viewInquiries()
     {
@@ -193,7 +193,8 @@ class AdminController extends CI_Controller
         $receivedInquiryType = "AgAd";
         $sentinquirydata = $this->InquiryModel->getSentInquiriesAdmin($sentInquiryType, $adminID);
         $receivedinquirydata = $this->InquiryModel->getReceivedInquiriesAdmin($receivedInquiryType, $adminID);
-        $data = array('sentinquirydata' => $sentinquirydata, 'receivedinquirydata' => $receivedinquirydata);
+        $admindata = $this->AdminModel->adminData($adminID)[0];
+        $data = array('sentinquirydata' => $sentinquirydata, 'receivedinquirydata' => $receivedinquirydata,'admindata'=>$admindata);
         $this->load->view('admin/inquiry', $data);
 
     }
